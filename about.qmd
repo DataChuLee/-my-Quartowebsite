@@ -1,0 +1,20 @@
+---
+title: "Data Analyst == 02"
+image: ./img/greenboy.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/DataChuLee
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com
+    # (additional links excluded for brevity)
+---
+
+### Analy tool
+- R
+- Python
+- Tableu
+- SQL(MySQL.MongoDB)

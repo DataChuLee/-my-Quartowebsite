@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Data Analyst == 02",
+    "section": "",
+    "text": "R\nPython\nTableu\nSQL(MySQL.MongoDB)"
+  },
+  {
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "저를 찾아오시려거든 유튜브 슬기로운 통계생활로 오세요."
+  },
+  {
+    "objectID": "docs/rstat101/index.html",
+    "href": "docs/rstat101/index.html",
+    "title": "시작하며",
+    "section": "",
+    "text": "R 통계 첫 시간에 해야할 일은 다음과 같습니다.\n\nR 설치\n기초 문법 다지기\n\n\nx <- 1:10"
+  },
+  {
+    "objectID": "docs/rstat101/lec1.html",
+    "href": "docs/rstat101/lec1.html",
+    "title": "test page",
+    "section": "",
+    "text": "x <- 1:10\ny <- x^2\nplot(x,y)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Main page",
+    "section": "",
+    "text": "1 + 1\n\n[1] 2\n\n\nThis is a Quarto websiteB\nto learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "Rmd.html",
+    "href": "Rmd.html",
+    "title": "Untitled",
+    "section": "",
+    "text": "This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.\nWhen you click the Knit button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:\n\nsummary(cars)\n\n     speed           dist       \n Min.   : 4.0   Min.   :  2.00  \n 1st Qu.:12.0   1st Qu.: 26.00  \n Median :15.0   Median : 36.00  \n Mean   :15.4   Mean   : 42.98  \n 3rd Qu.:19.0   3rd Qu.: 56.00  \n Max.   :25.0   Max.   :120.00"
+  },
+  {
+    "objectID": "Rmd.html#including-plots",
+    "href": "Rmd.html#including-plots",
+    "title": "Untitled",
+    "section": "Including Plots",
+    "text": "Including Plots\nYou can also embed plots, for example:\n\n\n\n\n\nNote that the echo = FALSE parameter was added to the code chunk to prevent printing of the R code that generated the plot."
+  },
+  {
+    "objectID": "rstat101.html",
+    "href": "rstat101.html",
+    "title": "시작하며",
+    "section": "",
+    "text": "R통계 첫 시간에 해야할 일은 다음과 같습니다."
+  }
+]

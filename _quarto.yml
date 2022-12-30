@@ -1,0 +1,46 @@
+project:
+  type: website
+
+website:
+  title: "슬기로운 O2생활"  
+  navbar:
+    search: true
+    background: dark
+    logo: ./img/logo.png
+    left:
+      - href: index.qmd
+        text: Home
+      - text: 'R 기초통계'
+        file: docs/rstat101/index.qmd
+      - text: 'About'
+        file: about.qmd
+      - text: 'Contact'
+        file: contact.qmd
+      - text: "Blog"
+        href: docs/blog/index.qmd
+      
+    right: 
+      - icon: github
+        href: https://github.com/DataChuLee
+        aria-label: Github Of DataChu
+  sidebar:
+    - title: "R 기초통계"
+      style: "floating"
+      collapse-level: 2
+      align: left
+      contents: 
+        - docs/rstat101/index.qmd
+        - docs/rstat101/lec1.qmd
+          
+    - title: "Contact"
+      contents: 
+        - contact.qmd
+
+format:
+  html:
+    theme: Flatly
+    css: styles.css
+    toc: true
+
+editor: visual
+

@@ -1,0 +1,10 @@
+---
+title: test page
+---
+this is test page 
+
+```{r}
+x <- 1:10
+y <- x^2
+plot(x,y)
+```
