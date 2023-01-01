@@ -269,6 +269,6 @@ Visual editor에서는 `Ctrl + /` 를 사용해서 div를 선택 후, class에 `
 위의 옵션들을 `true` 혹은 `false`로 설정할 수 있다.
 
 ```{r}
-#| echo: false
+#| echo: true
 plot(mtcars)
 ```

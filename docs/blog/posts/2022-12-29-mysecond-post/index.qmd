@@ -14,15 +14,9 @@ image-alt: "코딩하는 그림 이미지 입니다."
 
 ![](coding.jpg){.preview-image fig-align="center" fig-alt="코딩하는 그림 이미지 입니다."}
 
-
 ## Callout Basics
 
-내 마음대로 작성! 
--   note
--   tip
--   important
--   caution
--   warning
+내 마음대로 작성! - note - tip - important - caution - warning
 
 The color and icon will be different depending upon the type that you select.
 
@@ -44,4 +38,3 @@ This is an example of a callout with a caption.
 ```
 
 See our documentation on [Callouts](/docs/authoring/callouts.qmd), to learn more, including more about how to customize the appearance and behavior of callouts.
-

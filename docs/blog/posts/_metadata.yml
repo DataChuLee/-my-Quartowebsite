@@ -1,6 +1,12 @@
+comments: 
+  giscus: 
+    repo: DataChuLee/-my-Quartowebsite
+    category: Comments
+    lang: ko
 title-block-banner: "#EDF3F9"
-title-block-banner-color: body
+title-block-banner-color: black
 toc-location: left
 include-after-body:
   - ../signup.html
 search: false
+freeze: true 
