@@ -14,20 +14,6 @@
     "text": "저를 찾아오시려거든 유튜브 슬기로운 통계생활로 오세요."
   },
   {
-    "objectID": "docs/rstat101/index.html",
-    "href": "docs/rstat101/index.html",
-    "title": "시작하며",
-    "section": "",
-    "text": "R 통계 첫 시간에 해야할 일은 다음과 같습니다.\n\nR 설치\n기초 문법 다지기\n\n\nx <- 1:10"
-  },
-  {
-    "objectID": "docs/rstat101/lec1.html",
-    "href": "docs/rstat101/lec1.html",
-    "title": "test page",
-    "section": "",
-    "text": "x <- 1:10\ny <- x^2\nplot(x,y)"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "O2",

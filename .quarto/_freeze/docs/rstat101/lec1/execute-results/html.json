@@ -1,7 +1,7 @@
 {
-  "hash": "e1af6c9078ab478472fb5f2b15eea640",
+  "hash": "978e6972d82404214c5311fada46d621",
   "result": {
-    "markdown": "---\ntitle: test page\n---\n\nthis is test page \n\n\n::: {.cell}\n\n```{.r .cell-code}\nx <- 1:10\ny <- x^2\nplot(x,y)\n```\n\n::: {.cell-output-display}\n![](lec1_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n",
+    "markdown": "---\ntitle: test page\n---\n\n\nthis is test page\n\n\n::: {.cell}\n\n```{.r .cell-code}\nx <- 1:10\ny <- x^2\nplot(x,y)\n```\n\n::: {.cell-output-display}\n![](lec1_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n",
     "supporting": [
       "lec1_files"
     ],

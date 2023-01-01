@@ -1,7 +1,7 @@
 {
-  "hash": "5c53217c0e1276a8514710cc5332bc0c",
+  "hash": "589035b856331f37f9ba643153bc1b1d",
   "result": {
-    "markdown": "---\ntitle: 시작하며\nsubtitle: R로 배우는 기초통계 시작합니다.\n---\n\n\n### 안녕하세요! 반갑습니다!\n### R 통계 첫 시간에 해야할 일은 다음과 같습니다.\n- R 설치\n- 기초 문법 다지기 \n\n\n::: {.cell}\n\n```{.r .cell-code}\nx <- 1:10\n```\n:::\n",
+    "markdown": "---\ntitle: 시작하며\nsubtitle: R로 배우는 기초통계 시작합니다.\n---\n\n\n### 안녕하세요! 반갑습니다!\n\n### R 통계 첫 시간에 해야할 일은 다음과 같습니다.\n\n-   R 설치\n-   기초 문법 다지기\n\n\n::: {.cell}\n\n```{.r .cell-code}\nx <- 1:10\n```\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
