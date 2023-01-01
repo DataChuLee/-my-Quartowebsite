@@ -2,7 +2,7 @@ comments:
   giscus: 
     repo: DataChuLee/-my-Quartowebsite
     category: Comments
-    lang: ko
+    language: ko
 title-block-banner: "#EDF3F9"
 title-block-banner-color: black
 toc-location: left
