@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>분석하는 O2생활 - 시작하며</title>
+<title>분석하는 O2생활 - Lecture 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -170,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">시작하며</h1>
+      <h1 class="quarto-secondary-nav-title">Lecture 1</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rstat101/index.html" class="sidebar-item-text sidebar-link active">시작하며</a>
+  <a href="../../docs/rstat101/index.html" class="sidebar-item-text sidebar-link active">Lecture 1</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -198,22 +198,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#안녕하세요-반갑습니다" id="toc-안녕하세요-반갑습니다" class="nav-link active" data-scroll-target="#안녕하세요-반갑습니다">안녕하세요! 반갑습니다!</a></li>
-  <li><a href="#r-통계-첫-시간에-해야할-일은-다음과-같습니다." id="toc-r-통계-첫-시간에-해야할-일은-다음과-같습니다." class="nav-link" data-scroll-target="#r-통계-첫-시간에-해야할-일은-다음과-같습니다.">R 통계 첫 시간에 해야할 일은 다음과 같습니다.</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">시작하며</h1>
-<p class="subtitle lead">R로 배우는 기초통계 시작합니다.</p>
+<h1 class="title d-none d-lg-block">Lecture 1</h1>
+<p class="subtitle lead">Data 구조</p>
 </div>
 
 
@@ -227,21 +220,135 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="안녕하세요-반갑습니다" class="level3">
-<h3 class="anchored" data-anchor-id="안녕하세요-반갑습니다">안녕하세요! 반갑습니다!</h3>
-</section>
-<section id="r-통계-첫-시간에-해야할-일은-다음과-같습니다." class="level3">
-<h3 class="anchored" data-anchor-id="r-통계-첫-시간에-해야할-일은-다음과-같습니다.">R 통계 첫 시간에 해야할 일은 다음과 같습니다.</h3>
+<p>Lecture 1 시간에는 데이터의 전반적인 구조에 대해서 알아볼 것입니다.</p>
+<ol type="1">
+<li><p>데이터 구조</p>
 <ul>
-<li>R 설치</li>
-<li>기초 문법 다지기</li>
+<li><p>벡터 : 1가지 데이터 유형으로 구성된 1차원 구조의 data</p></li>
+<li><p>행렬 : 1가지 데이터 유형으로 구성된 2차원 구조의 data</p></li>
+<li><p>배열 : 행렬을 n차원으로 확대한 구조의 data</p></li>
+<li><p>리스트 : 여러 data 유형으로 구성된 1차원 구조의 data</p></li>
+<li><p>테이터 프레임 : 리스트를 2차원으로 확대한 구조의 data</p></li>
+</ul></li>
+<li><p>데이터 유형</p></li>
+</ol>
+<pre><code>-   숫자형 (numberic) :
+
+-   문자형 (character) :
+
+-   논리형 (logical) : TRUE 또는 FALSE 으로 이루어진 data</code></pre>
+<ol start="3" type="1">
+<li><p>데이터 유형</p>
+<ul>
+<li>단일형 데이터 : 숫자형 또는 문자형과 같이 한가지 데이터 유형으로 만 구성된 data(벡터, 행렬, 배열)</li>
 </ul>
+<!-- -->
+<ul>
+<li>다중형 데이터 : 숫자형 또는 문자형 데이터 등 여러가지 데이터 유형으로 구성된 data (리스트, 데이터 프레임)</li>
+</ul></li>
+<li><p>차원에 의한 분류</p>
+<ul>
+<li><p>1차원 데이터 : 1개의 정보</p></li>
+<li><p>2차원 데이터 : 2개의 정보</p></li>
+<li><p>3차원 데이터 : 3개의 정보</p></li>
+<li><p>n차원 데이터 : n개의 정보</p></li>
+</ul></li>
+</ol>
+<ul>
+<li><p>1차원 + 단일형 –&gt; 벡터</p></li>
+<li><p>2차원 + 단일형 -&gt; 행렬</p></li>
+<li><p>n차원 + 단일형 -&gt; 배열</p></li>
+<li><p>1차원 + 다중형 -&gt; 리스트</p></li>
+<li><p>2차원 + 다중형 -&gt; 데이터 프레임</p></li>
+</ul>
+<ol start="5" type="1">
+<li>숫자형 벡터 : numberic vertor - 실수형 벡터(double) : 정수(양수, 음수), 유리수, 무리수</li>
+</ol>
+<pre><code>-   정수형 벡터(integer vector)</code></pre>
+<p>수치형 벡터는 숫자 값으로 된 벡터다. 스칼라 값은 가장 단순한 수치형 벡터이다.</p>
+<p>코드로 예를 들어서 이해해보자!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ex1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ex1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span>(ex1) <span class="co"># mode(): 데이터 유형을 확인하는 함수 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ex1) <span class="co"># str(): 데이터 유형과 값을 확인하는 함수 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:3] 1 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(ex1) <span class="co"># length(): 데이터 길이를 확인하는 함수 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(ex1) <span class="co"># typeof(): 데이터 유형이 numberic 이라면, integer 인지 double 인지 알려주는 함수/ 즉, mode()함수보다 더 구체적으로 데이터의 유형을 알려주는 함수라고 할 수 있다.  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+<ol start="6" type="1">
+<li>문자형 벡터 : charater vector</li>
+</ol>
+<pre><code>문자형 벡터는 말 그대로 문자열로 된 집합이다. 여기서 문자열은 개별적인 문자 또는 기호가 아니라 this is a string 같은 문자의 집합을 의미한다. 문자형 벡터를 만드는 데 큰따옴표와 작은따옴표를 모두 사용할 수 있다.</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ex2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dog"</span>,<span class="st">"tiger"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ex2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "dog"   "tiger"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ex3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ex3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1" "2" "3"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span>(ex2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ex2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> chr [1:2] "dog" "tiger"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span>(ex3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ex3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> chr [1:3] "1" "2" "3"</code></pre>
+</div>
+</div>
+<ol start="7" type="1">
+<li>논리형 벡터</li>
+</ol>
+<pre><code>수치형 벡터와 달리 논리형 벡터는 TRUE 또는 FALSE 값의 집합이다. 이는 기본적으로 논리형 질문에 대한 참/거짓의 답을 의미한다.
+
+가장 간단한 논리형 벡터는 TRUE 아니면 FALSE 그 자체다.</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ex4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>) </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>ex4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span>(ex4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(ex4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> logi [1:2] TRUE FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">remove</span>(ex4) <span class="co"># 데이터 세트 삭제하기 -&gt; remove() / rm()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
