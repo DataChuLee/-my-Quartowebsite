@@ -1,5 +1,6 @@
 ---
-title: test page
+title: Lecture 2 
+subtitle: 행렬, 리스트, 데이터 프레임
 ---
 
 this is test page
