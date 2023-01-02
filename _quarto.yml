@@ -2,11 +2,16 @@ project:
   type: website
 
 website:
-  title: "분석하는 O2생활"  
+  title: "분석하는 O2생활"
+  site-url: "https://rmathematics-qmd.netlify.app/"
+  description: "O2 생활 Qmd 블로그"
   navbar:
     search: true
     background: dark
+    foreground: white
+    highlight: link-color
     logo: ./img/logo.png
+    collapse-below: lg
     left:
       - href: index.qmd
         text: Home
@@ -23,6 +28,8 @@ website:
       - icon: github
         href: https://github.com/DataChuLee
         aria-label: Github Of DataChu
+      - icon: rss
+        href: docs/blog/index.xml
   sidebar:
     - title: "R 기초통계"
       style: "floating"
@@ -38,9 +45,8 @@ website:
 
 format:
   html:
-    theme: Flatly
+    theme: simplex
     css: styles.css
     toc: true
 
 editor: visual
-
