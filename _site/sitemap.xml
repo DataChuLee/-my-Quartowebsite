@@ -2,46 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://rmathematics-qmd.netlify.app/about.html</loc>
-    <lastmod>2023-01-03T06:43:18.080Z</lastmod>
+    <lastmod>2023-01-03T07:06:16.937Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/contact.html</loc>
-    <lastmod>2023-01-03T06:43:19.231Z</lastmod>
+    <lastmod>2023-01-03T07:06:18.129Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/index.html</loc>
-    <lastmod>2023-01-03T06:43:20.647Z</lastmod>
+    <lastmod>2023-01-03T07:06:19.552Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/posts/2022-12-28-myfirst-post/index.html</loc>
-    <lastmod>2023-01-03T06:43:22.796Z</lastmod>
+    <lastmod>2023-01-03T07:06:21.420Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/posts/2022-12-29-mysecond-post/index.html</loc>
-    <lastmod>2023-01-03T06:43:24.389Z</lastmod>
+    <lastmod>2023-01-03T07:06:23.041Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/posts/Quarto-master/index.html</loc>
-    <lastmod>2023-01-03T06:43:27.149Z</lastmod>
+    <lastmod>2023-01-03T07:06:25.725Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/index.html</loc>
-    <lastmod>2023-01-03T06:43:31.482Z</lastmod>
+    <lastmod>2023-01-03T07:06:30.201Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec1.html</loc>
-    <lastmod>2023-01-03T06:43:56.623Z</lastmod>
+    <lastmod>2023-01-03T07:06:34.420Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec2.html</loc>
+    <lastmod>2023-01-03T07:06:38.113Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/index.html</loc>
-    <lastmod>2023-01-03T06:43:38.152Z</lastmod>
+    <lastmod>2023-01-03T07:06:40.774Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/Rmd.html</loc>
-    <lastmod>2023-01-03T06:43:41.833Z</lastmod>
+    <lastmod>2023-01-03T07:06:44.011Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/rstat101.html</loc>
-    <lastmod>2023-01-03T06:43:42.862Z</lastmod>
+    <lastmod>2023-01-03T07:06:44.960Z</lastmod>
   </url>
 </urlset>
