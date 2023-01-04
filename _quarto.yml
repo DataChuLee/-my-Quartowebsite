@@ -33,12 +33,13 @@ website:
   sidebar:
     - title: "R 기초통계"
       style: "floating"
-      collapse-level: 3
+      collapse-level: 4
       align: left
       contents: 
         - docs/rstat101/index.qmd
         - docs/rstat101/lec1.qmd
-        - docs/rstat101/lec2.qmd  
+        - docs/rstat101/lec2.qmd
+        - docs/rstat101/lec3^.qmd
     - title: "Contact"
       contents: 
         - contact.qmd

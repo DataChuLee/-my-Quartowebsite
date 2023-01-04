@@ -23,9 +23,8 @@ subtitle: 범주형 변수(명목형, 순서형), 연속형 변수
 
     -   R은 범주형 변수를 factor에 저장합니다. 아래는 문자 변수를 factor 변수로 변환하는 코드입니다.
 
-    ```{=html}
     <!-- -->
-    ```
+
         ``` r
         factor(x = character(), levels, labels = levels, ordered = is.ordered(x))
         ```

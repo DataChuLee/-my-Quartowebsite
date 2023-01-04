@@ -2,50 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://rmathematics-qmd.netlify.app/about.html</loc>
-    <lastmod>2023-01-03T07:06:16.937Z</lastmod>
+    <lastmod>2023-01-04T06:51:19.880Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/contact.html</loc>
-    <lastmod>2023-01-03T07:06:18.129Z</lastmod>
+    <lastmod>2023-01-04T06:51:21.223Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/index.html</loc>
-    <lastmod>2023-01-03T07:06:19.552Z</lastmod>
+    <lastmod>2023-01-04T06:51:22.785Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/posts/2022-12-28-myfirst-post/index.html</loc>
-    <lastmod>2023-01-03T07:06:21.420Z</lastmod>
+    <lastmod>2023-01-04T06:51:24.889Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/posts/2022-12-29-mysecond-post/index.html</loc>
-    <lastmod>2023-01-03T07:06:23.041Z</lastmod>
+    <lastmod>2023-01-04T06:51:26.748Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/posts/Quarto-master/index.html</loc>
-    <lastmod>2023-01-03T07:06:25.725Z</lastmod>
+    <lastmod>2023-01-04T06:51:29.527Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/index.html</loc>
-    <lastmod>2023-01-03T07:06:30.201Z</lastmod>
+    <lastmod>2023-01-04T06:51:34.420Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec1.html</loc>
-    <lastmod>2023-01-03T07:06:34.420Z</lastmod>
+    <lastmod>2023-01-04T06:51:38.794Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec2.html</loc>
-    <lastmod>2023-01-03T07:06:38.113Z</lastmod>
+    <lastmod>2023-01-04T06:51:42.528Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec3.html</loc>
+    <lastmod>2023-01-04T06:51:46.626Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec3^.html</loc>
+    <lastmod>2023-01-04T06:51:50.742Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/index.html</loc>
-    <lastmod>2023-01-03T07:06:40.774Z</lastmod>
+    <lastmod>2023-01-04T06:51:53.452Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/Rmd.html</loc>
-    <lastmod>2023-01-03T07:06:44.011Z</lastmod>
+    <lastmod>2023-01-04T06:51:57.145Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/rstat101.html</loc>
-    <lastmod>2023-01-03T07:06:44.960Z</lastmod>
+    <lastmod>2023-01-04T06:51:58.094Z</lastmod>
   </url>
 </urlset>

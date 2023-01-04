@@ -20,7 +20,7 @@ matrix(x, nrow = 3, ncol =2)
 matrix(x, nrow = 2, ncol = 3, byrow = T)
 ```
 
-2.   배열(array)
+2.  배열(array)
 
 ```{r}
 # array(변수명, dim=c(행수, 열수, 차원수))
@@ -29,7 +29,7 @@ array(y, dim = c(2,2,3))
 
 ```
 
-3.   리스트(list)
+3.  리스트(list)
 
 ```{r}
 # [] : 인덱스(index)
@@ -43,7 +43,7 @@ w[[1]] # vetor
 w[1] # list 
 ```
 
-4.   데이터프레임(DataFrame)
+4.  데이터프레임(DataFrame)
 
 ```{r}
 # 행 : 관측치 / 열 : 데이터세트의 세로 영역, 변수 / data 값(value): 관측된 값 
