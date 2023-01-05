@@ -40,6 +40,7 @@ website:
         - docs/rstat101/lec1.qmd
         - docs/rstat101/lec2.qmd
         - docs/rstat101/lec3^.qmd
+        - docs/rstat101/lec4.qmd
     - title: "Contact"
       contents: 
         - contact.qmd
