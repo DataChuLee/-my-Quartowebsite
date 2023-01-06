@@ -1,15 +1,14 @@
 ---
 title: Lecture 5 
-subtitle: 숫자형, 문자형 벡터 생성 및 seq()함수, rep()함수 
+subtitle: vector(1):숫자형, 문자형 벡터 생성 및 seq()함수, rep()함수 
 ---
 
 ### 차례
 
 -   벡터
 
-```{=html}
 <!-- -->
-```
+
     -   숫자형 벡터
 
     -   문자형 벡터

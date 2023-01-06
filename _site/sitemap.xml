@@ -2,62 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://rmathematics-qmd.netlify.app/about.html</loc>
-    <lastmod>2023-01-05T06:37:46.492Z</lastmod>
+    <lastmod>2023-01-06T06:09:15.945Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/contact.html</loc>
-    <lastmod>2023-01-05T06:37:47.695Z</lastmod>
+    <lastmod>2023-01-06T06:09:17.176Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/index.html</loc>
-    <lastmod>2023-01-05T06:37:49.463Z</lastmod>
+    <lastmod>2023-01-06T06:09:18.743Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/posts/2022-12-28-myfirst-post/index.html</loc>
-    <lastmod>2023-01-05T06:37:51.668Z</lastmod>
+    <lastmod>2023-01-06T06:09:20.669Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/posts/2022-12-29-mysecond-post/index.html</loc>
-    <lastmod>2023-01-05T06:37:53.651Z</lastmod>
+    <lastmod>2023-01-06T06:09:22.463Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/blog/posts/Quarto-master/index.html</loc>
-    <lastmod>2023-01-05T06:37:56.495Z</lastmod>
+    <lastmod>2023-01-06T06:09:26.722Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/index.html</loc>
-    <lastmod>2023-01-05T06:38:01.053Z</lastmod>
+    <lastmod>2023-01-06T06:09:31.022Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec1.html</loc>
-    <lastmod>2023-01-05T06:38:05.004Z</lastmod>
+    <lastmod>2023-01-06T06:09:34.776Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec2.html</loc>
-    <lastmod>2023-01-05T06:38:08.765Z</lastmod>
+    <lastmod>2023-01-06T06:09:38.554Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec3.html</loc>
-    <lastmod>2023-01-05T06:38:12.479Z</lastmod>
+    <lastmod>2023-01-06T06:09:43.314Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec3^.html</loc>
-    <lastmod>2023-01-05T06:38:16.749Z</lastmod>
+    <lastmod>2023-01-06T06:09:47.565Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec4.html</loc>
-    <lastmod>2023-01-05T06:38:43.486Z</lastmod>
+    <lastmod>2023-01-06T06:09:51.603Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rmathematics-qmd.netlify.app/docs/rstat101/lec5.html</loc>
+    <lastmod>2023-01-06T06:10:21.318Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/index.html</loc>
-    <lastmod>2023-01-05T06:38:25.084Z</lastmod>
+    <lastmod>2023-01-06T06:09:58.873Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/Rmd.html</loc>
-    <lastmod>2023-01-05T06:38:28.601Z</lastmod>
+    <lastmod>2023-01-06T06:10:02.665Z</lastmod>
   </url>
   <url>
     <loc>https://rmathematics-qmd.netlify.app/rstat101.html</loc>
-    <lastmod>2023-01-05T06:38:29.610Z</lastmod>
+    <lastmod>2023-01-06T06:10:03.801Z</lastmod>
   </url>
 </urlset>
