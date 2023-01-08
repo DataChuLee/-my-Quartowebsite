@@ -33,7 +33,7 @@ website:
   sidebar:
     - title: "R 기초통계"
       style: "floating"
-      collapse-level: 4
+      collapse-level: 7
       align: left
       contents: 
         - docs/rstat101/index.qmd
@@ -42,6 +42,7 @@ website:
         - docs/rstat101/lec3^.qmd
         - docs/rstat101/lec4.qmd
         - docs/rstat101/lec5.qmd
+        - docs/rstat101/lec6.qmd
     - title: "Contact"
       contents: 
         - contact.qmd

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>분석하는 O2생활 - Lecture 2</title>
+<title>분석하는 O2생활 - Lecture 7</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -170,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Lecture 2</h1>
+      <h1 class="quarto-secondary-nav-title">Lecture 7</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -190,7 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rstat101/lec1.html" class="sidebar-item-text sidebar-link active">Lecture 2</a>
+  <a href="../../docs/rstat101/lec1.html" class="sidebar-item-text sidebar-link">Lecture 2</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -215,7 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rstat101/lec6.html" class="sidebar-item-text sidebar-link">Lecture 7</a>
+  <a href="../../docs/rstat101/lec6.html" class="sidebar-item-text sidebar-link active">Lecture 7</a>
   </div>
 </li>
     </ul>
@@ -230,8 +230,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Lecture 2</h1>
-<p class="subtitle lead">범주형 변수(명목형, 순서형), 연속형 변수</p>
+<h1 class="title d-none d-lg-block">Lecture 7</h1>
+<p class="subtitle lead">factor함수와 levels, order 옵션</p>
 </div>
 
 
@@ -245,148 +245,126 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<ol type="1">
-<li><p>범주형 변수</p>
-<p>Factor는 제한된 수의 다른 값들을 저장하는 변수입니다. 이런 변수들을 범주형 변수(categorical variable)라고 부릅니다.</p>
-<p>데이터 셋에는 두 가지 유형의 자료가 있습니다.</p>
+<p><strong>차례</strong></p>
 <ul>
-<li><p>categorical(범주형)</p>
-<ul>
-<li><p>값이 제한되고, 특정 유한한 그룹을 기반으로 함&nbsp;</p></li>
-<li><p>ex) 나라, 연도, 성별, 직업 등</p></li>
-</ul></li>
-<li><p>continuous(연속형)</p>
-<ul>
-<li><p>정수(integer)부터 십진수(decimal)까지 모든 값을 가질 수 있음</p></li>
-<li><p>ex) 수익, 주가 등</p></li>
-</ul></li>
-<li><p>R은 범주형 변수를 factor에 저장합니다. 아래는 문자 변수를 factor 변수로 변환하는 코드입니다.</p></li>
+<li><strong>factor( ): factor 생성</strong></li>
 </ul>
 <!-- -->
-<pre><code>``` r
-factor(x = character(), levels, labels = levels, ordered = is.ordered(x))
-```
-
-* parameter(파라미터)
-
-    -   x: 데이터 벡터, 문자열이나 정수형만 가능
-
-    -   level: x가 가질 수 있는 값들, optional, 기본 값은 x의 고유한 목록
-
-    -   label: x에 레이블을 추가, ex) 1: 남성, 2: 여성
-
-    -   ordered: level 정렬 여부</code></pre></li>
+<pre><code>-   **levels옵션, order 옵션**</code></pre>
+<ul>
+<li><strong>as.factor( ) : factor로 변환</strong></li>
+</ul>
+<ol type="1">
+<li>factor( ): factor 생성</li>
 </ol>
-<p>Example</p>
+<p>factor : 데이터가 범주형 자료일 때 사용한다. (ex: 남자,여자)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ex5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>) <span class="co"># 임의의 숫자형 벡터 생성</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ex5 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 문자형 벡터</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>chr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'c'</span>,<span class="st">'h'</span>,<span class="st">'r'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>chr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2 1 3 2 1</code></pre>
+<pre><code>[1] "c" "h" "r"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 숫자형 벡터를 factor로 전환 </span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cat5 <span class="ot">&lt;-</span> <span class="fu">factor</span>(ex5,<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"apple"</span>,<span class="st">"pie"</span>,<span class="st">"jam"</span>)) </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cat5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(chr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] pie   apple jam   pie   apple
-Levels: apple pie jam</code></pre>
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factor </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(chr) <span class="co"># 문자형 벡터가 범주형 자료로 변환된게 아니다!  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] c h r
+Levels: c h r</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">'c'</span>,<span class="st">'h'</span>,<span class="st">'r'</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] c h r
+Levels: c h r</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3
+Levels: 1 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
 </div>
 </div>
-<p>머신러닝을 수행할 때 문자열을 factor로 전환하는 작업은 매우 중요합니다.</p>
-<p>범주형 변수는 명목형과 순서형 변수로 나뉩니다.</p>
+<ul>
+<li>levels 옵션 : level 순서 바꾸기</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)) <span class="co"># level의 순서는 숫자형 벡터를 기입한 순으로 1,2,3 이다. </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3
+Levels: 1 2 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1" "2" "3"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(f, <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>)) <span class="co"># 하지만 levels 라는 인자를 활용하면 그 순서를 바꿀 수 있다. </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3
+Levels: 3 2 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "3" "2" "1"</code></pre>
+</div>
+</div>
+<ul>
+<li><p>order 옵션 : level 순서 정하기</p>
+<ul>
+<li>plot을 그릴 때 order 순서대로 그려진다.</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>), <span class="at">order =</span> T)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>f</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3
+Levels: 3 &lt; 2 &lt; 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "3" "2" "1"</code></pre>
+</div>
+</div>
 <ol start="2" type="1">
-<li><p>명목형 변수(Nominal Categorical Variable)</p>
-<p>범주형 변수를 선언할 때 순서가 중요하지 않은 경우 사용합니다. 예를 들어 성별, 색상, 등은 순서가 중요하지 않으므로 명목형 변수로 선언합니다.</p>
-<p>Example</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 색을 담을 벡터 생성</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>color_vector <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"orange"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>, <span class="st">"indigo"</span>, <span class="st">"purple"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 출력</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>color_vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "red"    "orange" "yellow" "green"  "blue"   "indigo" "purple"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factor로 변환</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>color_factor <span class="ot">=</span> <span class="fu">factor</span>(color_vector)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 확인</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>color_factor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] red    orange yellow green  blue   indigo purple
-Levels: blue green indigo orange purple red yellow</code></pre>
-</div>
-</div>
-<ol start="3" type="1">
-<li><p>순서형 변수</p>
-<p>순서형 변수는 본연의 순서를 가지며, order 파라미터를 통해 순서를 지정할 수 있습니다.</p></li>
-</ol>
-<p>example</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 요일 벡터 생성</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>day_vector <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'tuesday'</span>, <span class="st">'monday'</span>, <span class="st">'wednesday'</span>, <span class="st">'friday'</span>, <span class="st">'saturday'</span>, <span class="st">'thursday'</span>, <span class="st">'sunday'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>day_vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "tuesday"   "monday"    "wednesday" "friday"    "saturday"  "thursday" 
-[7] "sunday"   </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 순서가 있는 factor로 변환</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>day_factor <span class="ot">=</span> <span class="fu">factor</span>(day_vector, <span class="at">order =</span> <span class="cn">TRUE</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">'monday'</span>, <span class="st">'tuesday'</span>, <span class="st">'wednesday'</span>, <span class="st">'thursday'</span>, <span class="st">'friday'</span>, <span class="st">'saturday'</span>, <span class="st">'sunday'</span>))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>day_factor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] tuesday   monday    wednesday friday    saturday  thursday  sunday   
-7 Levels: monday &lt; tuesday &lt; wednesday &lt; thursday &lt; friday &lt; ... &lt; sunday</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 레벨별 갯수 계산</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(day_factor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   monday   tuesday wednesday  thursday    friday  saturday    sunday 
-        1         1         1         1         1         1         1 </code></pre>
-</div>
-</div>
-<ol start="4" type="1">
-<li><p>연속형 변수</p>
-<p>연속형 변수는 R에서 기본으로 제공하는 함수입니다. 숫자 또는 정수로 저장됩니다.</p>
-<p>mtcar data는 내장 데이터 셋으로 유형별 자동차의 정보를 담고 있습니다.</p></li>
+<li>as.factor( ) : factor로 변환</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mtcars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>chr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'s'</span>,<span class="st">'t'</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(chr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
-Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
-Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
-Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
-Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
-Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
-Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
-Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
-Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
-Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
-Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
-Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
-Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
-AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
-Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
-Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
-Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
-Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
-Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
-Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
-Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<pre><code>[1] "character"</code></pre>
 </div>
-</div></li>
-</ol>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factor()</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.factor</span>(chr) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] s t
+Levels: s t</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(chr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factor로 변환</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>chr <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(chr) <span class="co"># 자료변환을 하려면 변수에 할당해야한다!</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(chr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
+</div>
 
 
 
