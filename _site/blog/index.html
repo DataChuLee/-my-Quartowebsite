@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>분석하는 O2생활 - 슬기로운 통계생활 Blog</title>
+<title>분석하는 O2생활 – index</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ ul.task-list{list-style: none;}
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-reading-time','listing-description','listing-categories','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
       searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
@@ -92,12 +92,6 @@ ul.task-list{list-style: none;}
 }
 </script>
 <script async="" src="https://hypothes.is/embed.js"></script>
-<style>
-    .quarto-title-block .quarto-title-banner {
-      color: white;
-background: #373A3C;
-    }
-    </style>
 
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
@@ -144,23 +138,7 @@ background: #373A3C;
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">슬기로운 통계생활 Blog</h1>
-            <p class="subtitle lead">News, tips, about R and stat</p>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
@@ -191,8 +169,7 @@ background: #373A3C;
         
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Authoring">Authoring <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Features">Features <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Quarto">Quarto <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
-
+<main class="content column-page-left" id="quarto-document-content">
 
 
 
@@ -201,6 +178,24 @@ background: #373A3C;
 
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+     </select>
+  </div>
+</div>
 <div class="list quarto-listing-default">
 <div class="quarto-post image-right" data-index="0" data-categories="Quarto,Authoring" data-listing-date-sort="1672326000000" data-listing-file-modified-sort="1672497174149" data-listing-reading-time-sort="4.115">
 <div class="thumbnail">
@@ -232,10 +227,10 @@ Authoring
 <div class="metadata">
 <a href="../blog/posts/Quarto-master/index.html">
 <div class="listing-date">
-Dec 30, 2022
+2022/12/30
 </div>
-<div class="listing-author">
-슬기로운통계생활
+<div class="listing-reading-time">
+4 min
 </div>
 </a>
 </div>
@@ -270,10 +265,10 @@ Authoring
 <div class="metadata">
 <a href="../blog/posts/2022-12-29-mysecond-post/index.html">
 <div class="listing-date">
-Dec 28, 2022
+2022/12/28
 </div>
-<div class="listing-author">
-슬기로운통계생활
+<div class="listing-reading-time">
+0 min
 </div>
 </a>
 </div>
@@ -312,10 +307,10 @@ Authoring
 <div class="metadata">
 <a href="../blog/posts/2022-12-28-myfirst-post/index.html">
 <div class="listing-date">
-Feb 13, 2022
+2022/02/13
 </div>
-<div class="listing-author">
-Charles Teague
+<div class="listing-reading-time">
+0 min
 </div>
 </a>
 </div>
