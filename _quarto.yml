@@ -2,9 +2,9 @@ project:
   type: website
 
 website:
-  title: "분석하는 O2생활"
+  title: "분석하는 O2"
   site-url: "https://rmathematics-qmd.netlify.app/"
-  description: "O2 생활 Qmd 블로그"
+  description: "O2 Qmd 블로그"
   navbar:
     search: true
     logo: ./img/logo.png
