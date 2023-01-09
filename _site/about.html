@@ -52,9 +52,16 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script type="application/json" class="js-hypothesis-config">
+{
+  "theme": "clean",
+  "openSidebar": false
+}
+</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
 
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -71,31 +78,23 @@ ul.task-list{list-style: none;}
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">Home</a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./docs/rstat101/index.html">R 기초통계</a>
+    <a class="nav-link" href="./Rstudy.html">R study</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./about.html" aria-current="page">About</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contact.html">Contact</a>
+    <a class="nav-link" href="./blog/index.html">Blog</a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./docs/blog/index.html">Blog</a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/DataChuLee"><i class="bi bi-github" role="img" aria-label="Github Of DataChu">
 </i> 
  </a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./docs/blog/index.xml"><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="./blog/index.xml"><i class="bi bi-rss" role="img">
 </i> 
  </a>
   </li>  
@@ -240,4 +239,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
