@@ -1,12 +1,25 @@
+# options specified here will apply to all posts in this folder
+
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: true
+
+# Enable banner style title blocks
+title-block-banner: true
+
+# Author name of all blog posts
+author: 'O2'
+
+# Table of content settings
+toc: true
+toc-depth: 4
+page-layout: article
 comments: 
   giscus: 
     repo: DataChuLee/-my-Quartowebsite
     category: Comments
     language: ko
-title-block-banner: "#EDF3F9"
-title-block-banner-color: black
-toc-location: left
 include-after-body:
   - ../signup.html
 search: false
-freeze: true 
+ 

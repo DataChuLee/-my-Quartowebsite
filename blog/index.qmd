@@ -1,16 +1,15 @@
 ---
-title: 슬기로운 통계생활 Blog
-subtitle: News, tips, about R and stat 
 listing:
   sort: "date desc"
   contents: "posts"
-  sort-ui: false
+  sort-ui: true
   filter-ui: false
   categories: true
+  fields: [date, title, reading-time, description, categories, image]
+  date-format: "YYYY/MM/DD"
   feed: true
 page-layout: full
 margin-header: signup.html
-title-block-banner: "#373A3C"
-title-block-banner-color: white
+title-block-banner: false
 search: false
 ---
