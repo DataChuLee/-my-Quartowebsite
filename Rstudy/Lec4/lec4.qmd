@@ -1,0 +1,154 @@
+---
+title: Lecture 4
+date: '2023-01-04'
+description: '자료형/자료구조 변환'
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### 차례
+
+1.  **자료형 변환 : as.원하는 자료형**
+
+    -   as.character()
+
+    -   as.complex()
+
+    -   as.numberic() / as.double() / as.integer()
+
+    -   as.logical()
+
+2.  **자료구조 변환**
+
+    -   as.data.frame() / as.list() / as.vector()
+
+    -   as.factor()
+
+3.  **자료형 변환 : `as.원하는자료형`**
+
+    -   `as.character` : 문자형으로
+
+        ```{r}
+        x <- 1:5 # 숫자형 벡터 생성 
+        x
+        str(x) # 구조 확인 
+
+        x <- as.character(x) # 숫자형 벡터를 문자형으로 바꿔줘 
+        x
+        str(x) # 구조 확인 
+        ```
+
+    -   `as.numeric / as.double` : 숫자형으로
+
+        ```{r}
+        x <- as.numeric(x)
+        x
+        str(x)
+
+        x <- as.complex(x)
+        x 
+        str(x)
+
+        x <- as.double(x)
+        x
+        str(x)
+        ```
+
+    -   `as.logical` : True or False 으로 전환
+
+        -   0 : False
+
+        -   0을 제외한 숫자 : True
+
+        ```{r}
+        x <- as.integer(x)
+        x
+        str(x)
+
+        x <- as.logical(x)
+        x
+        str(x)
+        ```
+
+        -   **주의사항 logical --\> integer**
+
+            -   True : 1
+
+            -   False : 0
+
+                ```{r}
+                x <- as.integer(x)
+                x
+                str(x)
+                ```
+
+    -   **문자 --\> 숫자 변환은 error**
+
+        ```{r}
+        y <- c("E","D","I","Y","A")
+        y
+        str(y)
+
+        y <- as.integer(y)
+        y <- as.numeric(y)
+        y <- as.double(y)
+        ```
+
+4.  자료구조 변환
+
+-   **as.data.frame() / as.matrix() / as.list() / as.vector()**
+
+```{r}
+# as.data.frame(): 데이터프레임으로 변환
+x <- 1:6
+str(x)
+
+x <- as.data.frame(x)
+str(x)
+
+# as.list(): 리스트로 변환
+x <- as.list(x)
+x
+str(x)
+
+# as.matrix(): 매트릭스로 변환 
+x <- 0:6
+x <- as.matrix(x)
+x
+str(x)
+
+# as.vector(): 벡터로 변환 
+x <- as.vector(x)
+x
+str(x)
+```
+
+-   **as.factor() : factor --\> int가 되면 숫자 1부터 시작(첫 번쨰 level)**
+
+    ```{r}
+    x <- as.factor(x)
+    x
+    str(x)
+
+    x <- as.integer(x)
+    x
+    str(x)
+    ```
+
+    **Example) 첫 번째 레벨인 C가 1/ 두 번쨰 레벨인 O가 2**
+
+    ```{r}
+    y <- c('C','C','O','C','O')
+    y
+
+    y <- as.factor(y)
+    y
+    str(y)
+
+    y <- as.integer(y)
+    y
+    str(y)
+    ```

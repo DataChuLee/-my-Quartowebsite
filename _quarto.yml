@@ -7,50 +7,32 @@ website:
   description: "O2 생활 Qmd 블로그"
   navbar:
     search: true
-    background: dark
-    foreground: white
-    highlight: link-color
     logo: ./img/logo.png
     collapse-below: lg
-    left:
-      - href: index.qmd
-        text: Home
-      - text: 'R 기초통계'
-        file: docs/rstat101/index.qmd
+    right:
+      - text: 'R study'
+        file: Rstudy.qmd
       - text: 'About'
         file: about.qmd
-      - text: 'Contact'
-        file: contact.qmd
       - text: "Blog"
-        href: docs/blog/index.qmd
-      
-    right: 
+        href: blog/index.qmd
       - icon: github
         href: https://github.com/DataChuLee
         aria-label: Github Of DataChu
       - icon: rss
-        href: docs/blog/index.xml
-  sidebar:
-    - title: "R 기초통계"
-      style: "floating"
-      collapse-level: 7
-      align: left
-      contents: 
-        - docs/rstat101/index.qmd
-        - docs/rstat101/lec1.qmd
-        - docs/rstat101/lec2.qmd
-        - docs/rstat101/lec3^.qmd
-        - docs/rstat101/lec4.qmd
-        - docs/rstat101/lec5.qmd
-        - docs/rstat101/lec6.qmd
-    - title: "Contact"
-      contents: 
-        - contact.qmd
-
+        href: blog/index.xml
+  comments: 
+    hypothesis: 
+      theme: clean
+      openSidebar: false
 format:
   html:
-    theme: simplex
-    css: styles.css
+    smooth-scroll: true
+    theme: 
+      - styles.css
+      - custom.scss
     toc: true
+    toc-location: right
+    code-link: true
 
 editor: visual

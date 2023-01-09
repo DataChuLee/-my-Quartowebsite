@@ -1,0 +1,20 @@
+---
+title: R study 
+listing:
+  contents: Rstudy/**/*.qmd
+  sort: "date desc"
+  type: table
+  categories: true
+  sort-ui: true
+  filter-ui: false
+  fields: [date, title, description]
+  date-format: "YYYY/MM/DD"
+  feed: true
+page-layout: full
+title-block-banner: false
+---
+
+반갑습니다! R study에 오신 것을 환영합니다!
+
+::: {#sample-listings}
+:::

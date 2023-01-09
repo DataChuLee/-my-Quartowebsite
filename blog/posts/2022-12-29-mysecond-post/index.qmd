@@ -1,0 +1,40 @@
+---
+title: 두번째 포스트
+subtitle: Quarto로 하는 두번째 포스팅입니다. 
+description: |
+  Quarto 사이트 어렵군요
+categories:
+  - Quarto
+  - Authoring
+author: 슬기로운통계생활
+date: 12/28/2022
+image: coding.jpg
+image-alt: "코딩하는 그림 이미지 입니다."
+---
+
+![](coding.jpg){.preview-image fig-align="center" fig-alt="코딩하는 그림 이미지 입니다."}
+
+## Callout Basics
+
+내 마음대로 작성! - note - tip - important - caution - warning
+
+The color and icon will be different depending upon the type that you select.
+
+## Syntax
+
+Create callouts in markdown using the following syntax (note that the first markdown heading used within the callout is used as the callout heading):
+
+``` markdown
+:::{.callout-note}
+Note that there are five types of callouts, including:
+`note`, `tip`, `warning`, `caution`, and `important`.
+:::
+
+:::{.callout-tip}
+## Tip With Caption
+
+This is an example of a callout with a caption.
+:::
+```
+
+See our documentation on [Callouts](/docs/authoring/callouts.qmd), to learn more, including more about how to customize the appearance and behavior of callouts.

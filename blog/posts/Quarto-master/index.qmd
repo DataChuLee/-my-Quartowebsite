@@ -1,0 +1,274 @@
+---
+title: Qmd 작성법  
+subtitle: Quarto로 포스팅을 할 때 문법
+description: |
+  Qmd의 모든 것! 
+categories:
+  - Quarto
+  - Authoring
+author: 슬기로운통계생활
+date: 12/30/2022
+image: coding.jpg
+image-alt: "코딩하는 그림 이미지 입니다."
+---
+
+## 가장 중요한 단축키
+
+Visual editor에서 사용하는 모든 기능을 찾을 수 있는 검색 단축키 `Ctrl + /`
+
+는 무조건 알고 있어야 한다.
+
+## 글자 서식 방법
+
+글자를 굵게 표현 : **Ctrl + B**
+
+글자를 기울게 표현 : *Ctrl + B*
+
+글자 스트록 넣기 : 문자를 물결 두개 (\~\~) 양쪽에 감싸주기! ~~테스트~~
+
+위첨자: 문자를 꺾쇠(\^) 감싸주기! (테스트^위첨자^)
+
+아래첨자: 문자,를 물결 한개(\~) 양쪽에 감싸주기! (테스트~아래첨자)~
+
+인라인 코드 넣기(문서 안에 코드 폰트로 넣기) : `Ctrl+D`
+
+## 각종 제목 넣기
+
+`Ctrl + / 를 사용해서 H1 ~ H6 까지 찾아서 쓰자!`
+
+## 링크 넣는 법!
+
+Qmd에서 바로 작업시에는 대괄호 안에 표현될 글자, 중괄호 안에 연결할 링크를 넣어야 하지만, Visual Editor에서는 작동하지 않는다.
+
+\[Quarto\](https://quarto.org)
+
+Visual Editor 단축키 : Ctrl + K
+
+[Quarto](https://quarto.org)
+
+## 이미지 넣는 법!
+
+에디터 위쪽 그림버튼 클릭! or Ctrl + / 로 검색
+
+![코딩하는 그림](/docs/blog/posts/2022-12-29-mysecond-post/coding.jpg){fig-align="left" width="374"}
+
+크기 조정하는 방법은 일단 삽입 후 점 버튼을 눌러 볼 것!
+
+## 리스트 만들기
+
+방법1. 위쪽 버튼 클릭 혹은 Ctrl + / 검색하기!
+
+방법2. 그냥 별표(\*) 누르고 한 칸 공백 삽입 or 1. 입력 후 한칸 공백을 삽입하면 자동으로 리스트 작성모드로 들어감.
+
+I.  테스트\
+    1.  테스트\
+    2.  test
+II. 테스트\
+    1.  test1\
+    2.  테스트
+
+ordered 리스트 삽입 후 점 세개 버튼을 클릭하면, 기존의 리스팅 번호를 바꿀 수 있다!
+
+## 
+
+## 테이블 입력하기
+
+Visual editor 테이블 기능 사용하면 됨. (위쪽 table) 클릭!
+
+| Col1 | Col2 | Col3 |
+|------|------|------|
+|      |      |      |
+|      |      |      |
+|      |      |      |
+
+: table test
+
+## 코드 블록 넣기
+
+코드 블록을 그냥 코드만 넣는 기능! 언어를 선택할 시 그에 맞는 하이라이팅 기능 제공.
+
+Ctrl + / 검색으로 Code block 넣기 선택!
+
+## 수식 입력 기능
+
+기본적인 수식 입력은 Ctrl + /로 inline math 혹은 display math 선택
+
+커스텀 LaTex 코드를 입력하고 싶은 경우, 따로 def을 사용하여 설정 할 수 있다.
+
+커스텀 코드는 보여주고 싶지 않으므로 다음과 같이 .hidden 으로 감싸줌
+
+위와 같이 입력해놓으면 새로운 Latex 코드인 `\RR` 함수를 사용 할 수 있다.
+
+-   `\RR` -\> R
+
+## Flow 차트 그리기!
+
+mermaid 앱을 사용하여 flow chart 그리는 것을 지원해 줌! 주의할 점은 Rcode 청크를 먼저 입력한 후에, {r} 부분을 {mermaid} 바꿔주면 됨.
+
+아래와 같은 mermaid 코드는
+
+``` mermaid
+flowchart LR
+  A[qmd] --> B(Pandoc)
+  B --> C{Kniting}
+  C --> D[Word]
+  C --> E[HTML]
+  C --> F[PDF]
+```
+
+-   flowchart LR는 왼쪽에서 오른쪽으로 가는 flow chart를 의미
+
+-   대괄호 (사각형 엣지) / 중괄호(마름모) / 괄호(둥근 엣지)를 `의미`
+
+-   `%%| echo: true` 옵션으로 코드 에코 지원한다.
+
+-   실행언어를 mermaid로 설정
+
+다음과 같은 flow chart를 생성해낸다.
+
+```{mermaid}
+%%| echo: true 
+flowchart LR
+  A(Qmd)--> B[Pandoc]
+  B --> C{Kniting}
+  C --> D[Word]
+  C --> E[HTML]
+  C --> F[PDF]
+```
+
+엄청 많은 템플릿을 지원하므로, [mermaid 홈페이지](https://mermaid.js.org/intro/)를 참고하자자
+
+## 순서도 넣기
+
+sequenceDiagram 예제
+
+``` mermaid
+%%| echo: true 
+sequenceDiagram
+  participant Alice
+  participant Bob
+  Alice->>John: Hello John, how are you?
+  loop Healthcheck
+    John->>John: Fight against hypochondria
+  end
+  Note right of John: Rational thoughts <br/>prevail!
+  John-->>Alice: Great!
+  John->>Bob: How about you?
+  Bob-->>John: Jolly good!
+```
+
+```{mermaid}
+%%| echo: true 
+sequenceDiagram
+  participant Alice
+  participant Bob
+  Alice->>John: Hello John, how are you?
+  loop Healthcheck
+    John->>John: Fight against hypochondria
+  end
+  Note right of John: Rational thoughts <br/>prevail!
+  John-->>Alice: Great!
+  John->>Bob: How about you?
+  Bob-->>John: Jolly good!
+```
+
+## Graphviz
+
+Graphviz의 경우 `//| echo: true` 옵션을 사용하여 코드 에코 기능을 사용 할 수 있다. 다음과 같은 코드는 네트워크 관계도를 만들어 준다.
+
+-   실행 언어를 dot으로 설정
+
+```` dot
+```{dot}
+graph G {
+  layout=neato
+  run -- intr;
+  intr -- runbl;
+  runbl -- run;
+  run -- kernel;
+  kernel -- zombie;
+  kernel -- sleep;
+  kernel -- runmem;
+  sleep -- swap;
+  swap -- runswap;
+  runswap -- new;
+  runswap -- runmem;
+  new -- runmem;
+  sleep -- runmem;
+}
+```
+````
+
+```{dot}
+graph G {
+  layout=neato
+  run -- intr;
+  intr -- runbl;
+  runbl -- run;
+  run -- kernel;
+  kernel -- zombie;
+  kernel -- sleep;
+  kernel -- runmem;
+  sleep -- swap;
+  swap -- runswap;
+  runswap -- new;
+  runswap -- runmem;
+  new -- runmem;
+  sleep -- runmem;
+}
+```
+
+## 콤마 세개 연산자
+
+::: 를 사용하면 HTML 언어에서의 div를 설정할 수 있음. 이러한 기능은 원하는 css를 원하는 부분에 적용할 수 있도록 도와준다.
+
+-   사용 예: border css를 적용
+
+<!-- -->
+
+    ::: {.border}
+    이 문장을 사각형으로 둘러싸줍니다.
+    :::
+
+::: border
+이 문장을 사각형으로 둘러싸줍니다.
+:::
+
+-   사용 예 : callout-note class를 적용
+
+<!-- -->
+
+    ::: {.callout-note}
+    이 문장을 Note로 만들어 줍니다.
+    :::
+
+Visual editor에서는 `Ctrl + /` 를 사용해서 div를 선택 후, class에 `.callout-note`를 입력
+
+::: callout-note
+이 문장을 Note로 만들어 줍니다.
+:::
+
+## R 코드 청크 입력방법
+
+`#|` 를 사용해서 옵션 설정한다.
+
+설정할 수 있는 옵션들
+
+-   echo
+
+-   eval
+
+-   output
+
+-   include
+
+-   warning
+
+-   error
+
+위의 옵션들을 `true` 혹은 `false`로 설정할 수 있다.
+
+```{r}
+#| echo: true
+plot(mtcars)
+```

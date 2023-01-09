@@ -1,0 +1,79 @@
+---
+title: Lecture 7 
+date: '2023-01-07'
+description: 'factor함수와 levels, order 옵션'
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+**차례**
+
+-   **factor( ): factor 생성**
+
+<!-- -->
+
+    -   **levels옵션, order 옵션**
+
+-   **as.factor( ) : factor로 변환**
+
+1.  factor( ): factor 생성
+
+factor : 데이터가 범주형 자료일 때 사용한다. (ex: 남자,여자)
+
+```{r}
+# 문자형 벡터
+chr <- c('c','h','r')
+chr
+class(chr)
+
+# factor 
+factor(chr) # 문자형 벡터가 범주형 자료로 변환된게 아니다!  
+
+f <- factor(c('c','h','r'))
+f
+class(f)
+
+f <- factor(c(1,2,3))
+f
+class(f)
+```
+
+-   levels 옵션 : level 순서 바꾸기
+
+```{r}
+f <- factor(c(1,2,3)) # level의 순서는 숫자형 벡터를 기입한 순으로 1,2,3 이다. 
+f
+levels(f)
+
+f <- factor(f, levels = c(3,2,1)) # 하지만 levels 라는 인자를 활용하면 그 순서를 바꿀 수 있다. 
+f
+levels(f)
+```
+
+-   order 옵션 : level 순서 정하기
+
+    -   plot을 그릴 때 order 순서대로 그려진다.
+
+```{r}
+f <- factor(c(1,2,3), levels = c(3,2,1), order = T)
+f
+levels(f)
+```
+
+2.  as.factor( ) : factor로 변환
+
+```{r}
+chr <- c('s','t')
+class(chr)
+
+# factor()
+as.factor(chr) 
+class(chr)
+
+# factor로 변환
+chr <- as.factor(chr) # 자료변환을 하려면 변수에 할당해야한다!
+class(chr)
+```
