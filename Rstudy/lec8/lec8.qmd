@@ -1,0 +1,142 @@
+---
+title: Lecture 8 
+date: '2023-01-08'
+description: 'matrix(1)'
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### 차례
+
+-   매트릭스 만들기: dim() , matrix()
+
+-   매트릭스 index : \[ \] 사용
+
+-   매트릭스 게산 : 단순 계산 / 행렬 계산
+
+-   매트릭스 이름 짓기 : rownames( ), colnames( )
+
+-   매트릭스 pre - allocate
+
+1.  **매트릭스 만들기 : dim( )**
+
+-   **dim( )**
+
+```{r}
+a <- 1:4
+a
+
+# 2행 2열 matrix 
+dim(a) <- c(2,2)
+a
+
+class(a)
+```
+
+-   **matrix(벡터, nrow, ncol)**
+
+```{r}
+# 2행 4열
+m <- matrix(1:8, nrow = 2, ncol = 4)
+m
+
+dim(m) # 2행4열 의미 
+```
+
+-   **byrow = T 옵션(default = F) : 1행 기준으로 먼저 채우기**
+
+```{r}
+m <- matrix(1:8, nrow = 2, ncol = 4) # 1열 기준으로 채우기 
+m
+
+m <- matrix(1:8, nrow = 2, ncol = 4, byrow = T) # 1행 기준으로 채우기
+m
+```
+
+2.  **매트릭스index : \[ \] 사용**
+
+```{r}
+m <- matrix(1:8,nrow = 2, ncol = 4)
+m
+
+# 1행 index
+m[1,]
+
+# 1열 index
+m[,1]
+
+# 1행 1열 index
+m[1,1]
+
+# 2행 3열 index
+m[2,3]
+
+# 1열뺴고 전부인 index
+m[,-1]
+
+# 1행빼고 전부인 index
+m[-1,]
+```
+
+-   **복수 행, 열 index**
+
+```{r}
+# 1,2열 index
+m[,1:2]
+
+# 1,3열 index
+m[,c(1,3)]
+```
+
+3.  **매트릭스 계산 : 단순 계산 / 행렬 계산**
+
+**단순계산 : 각 위치별 계산 적용**
+
+```{r}
+a <- matrix(c(1,2,3,4),2,2) # 2행 2열 matrix
+a
+
+b <- matrix(c(5,6,7,8),2,2)
+b
+
+a + b 
+a - b
+a * b 
+a / b
+```
+
+**행렬 계산**
+
+-   행렬의 곱 : %\*%
+
+-   diag(A) : 대각원소 뽑기, 벡터의 형태로 추출
+
+-   diag(2) : 2 by 2 단위 행렬 생성
+
+-   t(A) : 트랜스포스 --\> 행과 열을 바꾸는 것. 전치행렬
+
+-   det(A) : 행렬식 구해줌 \<Determinant(ad-bc)\>
+
+-   solve(A) : 역행렬
+
+```{r}
+a
+
+diag(a) 
+
+diag(2) 
+
+t(a)
+
+det(a)
+
+solve(a)
+
+a;b # a행렬과 b 행렬 붙이기
+
+a %*% b # a행렬과 b행렬의 곱
+a %*% solve(a) # a행렬과 a의 역행렬의 곱이므로 단위행렬 나옴 
+```
