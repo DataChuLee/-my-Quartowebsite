@@ -1,0 +1,60 @@
+---
+title: Lecture 10
+date: '2023-01-10'
+description: 'array : dim(), array(), index'
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### 차례 
+
+1.  array 만들기
+
+-   dim( ), array( )
+
+2.  array index(인덱스)
+
+1.  **array만들기**
+
+**array : 행과 열, Page를 가지는 3차원 구조**
+
+**dim( ) \<- c(행, 열, Page)**
+
+```{r}
+z <- 1:48
+z
+
+dim(z) <- c(4,4,3)
+z
+class(z)
+```
+
+-   **array (data, dim)**
+
+```{r}
+z <- 1:48
+arr <- array(z, c(4,4,3))
+arr
+```
+
+2.  **array index**
+
+**array\[행,열, page\]**
+
+```{r}
+arr
+arr[1,1,1] # 1행 1열 1page 부분 
+arr[1,2,1] # 1행 2열 1page 
+arr[3,3,1] 
+
+arr[1,1,] # 1행 1열인 모든 page 
+arr[2,2,] # 2행 2열인 모든 page
+arr[2,,1] # 2행 1page인 부분 
+arr[3,,3] # 3행 3page인 부분
+
+arr[,,1] # 1page 
+arr[,,2] # 2page
+```

@@ -1,0 +1,78 @@
+---
+title: Lecture 9
+date: '2023-01-09'
+description: 'matrix(2)'
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### 차례 
+
+-   매트릭스 이름 짓기 : rownames( ), colnames( )
+
+-   매트릭스 pre - allocate
+
+1.  **매트릭스 이름 짓기 : rownames( ), colnames( )**
+
+-   rownames(x) \<- 이름을 출력(c을 이용)
+
+-   colnames(x) \<- 이름을 출력(c을 이용)
+
+```{r}
+a <- matrix(1:9,3,3,byrow = T) # 3행 3열, 행 부터 먼저 기입
+a
+rownames(a)
+rownames(a) <- c("r1","r2","r3") # 행 이름 기입
+rownames(a)
+a
+
+colnames(a)
+colnames(a) <- c("c1","c2","c3") # 열 이름 기입 
+colnames(a)
+a
+```
+
+-   이름일 이용한 index
+
+```{r}
+a 
+a[1,1] # 1행 1열
+a[2,3] # 2행 3열
+a["r1","c1"] # 1행 1열인 부분을 행과 열의 이름을 이용한 index
+a["r2","c3"] # 2행 3열인 부분을 행과 열의 이름을 이용한 index
+a[c(1,2),] # 1,2행 
+a[c("r1","r2"),] 
+```
+
+2.  **매트릭스 pre -allocate**
+
+사전에 공간을 만들어 놓은 후 값을 기입하는 것(속도 향상)
+
+```{r}
+mat <- matrix(0,3,3)
+mat
+
+diag(mat) <- 7 # 주대각 성분 위치에 7을 기입
+mat
+
+mat[2,3] <- 77 # 2행 3열의 index에 77을 기입 
+mat
+
+```
+
+-   matrix로 plot 그리기 Ex) $y = x^2$
+
+```{r}
+x <- 1:10
+y <- x^2
+
+# length(x) : x 의 원소 개수 
+length(x)
+
+mat <- matrix(c(x,y),length(x),2)
+mat
+plot(mat)
+```

@@ -17,10 +17,6 @@ editor_options:
 
 -   매트릭스 게산 : 단순 계산 / 행렬 계산
 
--   매트릭스 이름 짓기 : rownames( ), colnames( )
-
--   매트릭스 pre - allocate
-
 1.  **매트릭스 만들기 : dim( )**
 
 -   **dim( )**
