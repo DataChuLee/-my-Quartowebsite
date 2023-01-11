@@ -10,7 +10,615 @@
 <atom:link href="https://rmathematics-qmd.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>O2 Qmd 블로그</description>
 <generator>quarto-1.0.36</generator>
-<lastBuildDate>Mon, 09 Jan 2023 15:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 11 Jan 2023 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>Lecture 12</title>
+  <dc:creator>O2</dc:creator>
+  <link>https://rmathematics-qmd.netlify.app/Rstudy/lec12/lec12.html</link>
+  <description><![CDATA[ <section id="차례" class="level3"><h3 class="anchored" data-anchor-id="차례">차례</h3>
+<ul>
+<li>
+<p>데이터 프레임(Data Frame)</p>
+<ul>
+<li>변환</li>
+</ul>
+</li>
+<li><p>Data Frame 만들기</p></li>
+<li><p>indexing</p></li>
+<li><p>pre - allocate</p></li>
+</ul>
+<ol type="1">
+<li><strong>데이터 프레임(Data Frame)</strong></li>
+</ol>
+<ul>
+<li><p>SQL의 table = R의 Data Frame</p></li>
+<li><p>list의 모임이며, 하나의 list가 열(column)이다.</p></li>
+<li><p>같은 열끼리는 같은 type 이어야 한다.</p></li>
+<li><p>제약 조건: 원소의 길이가 같아야한다.</p></li>
+<li>
+<p>변환</p>
+<ul>
+<li><p>Vector –&gt; factor : 벡터의 특별한 형태</p></li>
+<li><p>Array –&gt; matrix</p></li>
+<li><p>list –&gt; data.frame : list의 특별한 형태</p></li>
+<li><p>list는 각각의 원소들의 type이 같은 필요가 없다.</p></li>
+<li>
+<p>data.frame은 각각의 원소들의 type이 같아야한다. (column별)</p>
+<ul>
+<li>그래서 특별한 형태라는 것!!</li>
+</ul>
+</li>
+<li><p>list는 vector, factor, array, matrix, list, data.frame 가능!</p></li>
+</ul>
+</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>data.frame 만들기</strong></li>
+</ol>
+<p><code>data.frame(열이름1=원소, 열이름2=원소2,….)</code></p>
+<div class="cell">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 데이터 프레임 만들때 열의 이름과 원소 같이 생성하는 경우</span></span>
+<span><span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">3</span>, y <span class="op" style="color: #5E5E5E;">=</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">'a'</span>,<span class="st" style="color: #20794D;">'b'</span>,<span class="st" style="color: #20794D;">'c'</span><span class="op" style="color: #5E5E5E;">)</span>, z<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">*</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">df</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y z
+1 1 a 3
+2 2 b 6
+3 3 c 9</code></pre>
+</div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fl" style="color: #AD0000;">4</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">6</span></span>
+<span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">letters</span><span class="op" style="color: #5E5E5E;">[</span><span class="va" style="color: #111111;">x</span><span class="op" style="color: #5E5E5E;">]</span></span>
+<span><span class="va" style="color: #111111;">y</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "d" "e" "f"</code></pre>
+</div>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">z</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">*</span><span class="va" style="color: #111111;">x</span></span>
+<span><span class="va" style="color: #111111;">z</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12 15 18</code></pre>
+</div>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 데이터 프레임 만들기 전에 먼저 열들의 변수를 만든 후 데이터 프레임을 생성하는 경우</span></span>
+<span><span class="va" style="color: #111111;">df2</span> <span class="op" style="color: #5E5E5E;">&lt;-</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>,<span class="va" style="color: #111111;">y</span>,<span class="va" style="color: #111111;">z</span><span class="op" style="color: #5E5E5E;">)</span> </span>
+<span><span class="va" style="color: #111111;">df2</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y  z
+1 4 d 12
+2 5 e 15
+3 6 f 18</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li><strong>indexing</strong></li>
+</ol>
+<ul>
+<li><strong>list index : class의 변화에 대해 주목!</strong></li>
+</ul>
+<p><strong>data.frame의 indexing에는 list index 방법과 matrix index 방법이 존재한다.</strong></p>
+<p><strong>두 개의 index에는 차이가 존재한다. 차이는 밑의 코드를 보면서 알 수 있을 것이다.</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">df</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y z
+1 1 a 3
+2 2 b 6
+3 3 c 9</code></pre>
+</div>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">l.df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span></span>
+<span><span class="va" style="color: #111111;">l.df</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">l.df</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># vector </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">l.df2</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span></span>
+<span><span class="va" style="color: #111111;">l.df2</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x
+1 1
+2 2
+3 3</code></pre>
+</div>
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">l.df2</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># data.frame 형태로 출력된다. </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">l.df3</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[</span><span class="st" style="color: #20794D;">'x'</span><span class="op" style="color: #5E5E5E;">]</span> </span>
+<span><span class="va" style="color: #111111;">l.df3</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x
+1 1
+2 2
+3 3</code></pre>
+</div>
+<div class="sourceCode" id="cb21" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">l.df3</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># data.frame 형태로 출력된다. </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="sourceCode" id="cb23" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">l.df4</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">]</span></span>
+<span><span class="va" style="color: #111111;">l.df4</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x z
+1 1 3
+2 2 6
+3 3 9</code></pre>
+</div>
+<div class="sourceCode" id="cb25" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">l.df4</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># data.frame 형태로 출력된다. </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+<ul>
+<li>matrix index : [행,열]</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb27" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">df</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y z
+1 1 a 3
+2 2 b 6
+3 3 c 9</code></pre>
+</div>
+<div class="sourceCode" id="cb29" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">m.df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;">#1행 1열</span></span>
+<span><span class="va" style="color: #111111;">m.df</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode" id="cb31" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">m.df</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># 1이라는 interger 출력 </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+<div class="sourceCode" id="cb33" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">m.df2</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[</span>,<span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1열 추출</span></span>
+<span><span class="va" style="color: #111111;">m.df2</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb35" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">m.df2</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># 숫자형 벡터 출력</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+<div class="sourceCode" id="cb37" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">m.df3</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[</span>,<span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 2열 추출 </span></span>
+<span><span class="va" style="color: #111111;">m.df3</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b" "c"</code></pre>
+</div>
+<div class="sourceCode" id="cb39" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">m.df3</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># 문자형 벡터 출력</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="sourceCode" id="cb41" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">m.df4</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[</span>,<span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1,2열 추출 </span></span>
+<span><span class="va" style="color: #111111;">m.df4</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y
+1 1 a
+2 2 b
+3 3 c</code></pre>
+</div>
+<div class="sourceCode" id="cb43" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">m.df4</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># data.frame 추출</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="sourceCode" id="cb45" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">m.df5</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">2</span>,<span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1,2행 추출</span></span>
+<span><span class="va" style="color: #111111;">m.df5</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y z
+1 1 a 3
+2 2 b 6</code></pre>
+</div>
+<div class="sourceCode" id="cb47" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">m.df5</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># data.frame 추출</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li><strong>pre - allocate : 미리 공간만들어서 그 곳에 원소 넣기</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb49" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">n</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fl" style="color: #AD0000;">3</span></span>
+<span></span>
+<span><span class="va" style="color: #111111;">df</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op" style="color: #5E5E5E;">(</span>x <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">n</span><span class="op" style="color: #5E5E5E;">)</span>, y <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">n</span><span class="op" style="color: #5E5E5E;">)</span>, z <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">df</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y z
+1 0   0
+2 0   0
+3 0   0</code></pre>
+</div>
+<div class="sourceCode" id="cb51" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">## list index 방법 </span></span>
+<span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">3</span> <span class="co" style="color: #5E5E5E;"># 1열의 원소에 1:3이라는 숫자형 벡터 기입</span></span>
+<span><span class="va" style="color: #111111;">df</span> </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y z
+1 1   0
+2 2   0
+3 3   0</code></pre>
+</div>
+<div class="sourceCode" id="cb53" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 2열의 원소에는 내장 데이터 letter을 이용하여 a b c 기입</span></span>
+<span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">letters</span><span class="op" style="color: #5E5E5E;">[</span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> </span>
+<span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">letters</span><span class="op" style="color: #5E5E5E;">[</span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 위 코드와 동일한 의미</span></span>
+<span><span class="va" style="color: #111111;">df</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y z
+1 1 a 0
+2 2 b 0
+3 3 c 0</code></pre>
+</div>
+<div class="sourceCode" id="cb55" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;">## matrix index 방법 </span></span>
+<span><span class="co" style="color: #5E5E5E;"># 3열은 1열의 숫자형 벡터의 3배수</span></span>
+<span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[</span>,<span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">]</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">*</span><span class="va" style="color: #111111;">df</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span></span>
+<span><span class="va" style="color: #111111;">df</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x y z
+1 1 a 3
+2 2 b 6
+3 3 c 9</code></pre>
+</div>
+</div>
+
+
+</section> ]]></description>
+  <guid>https://rmathematics-qmd.netlify.app/Rstudy/lec12/lec12.html</guid>
+  <pubDate>Wed, 11 Jan 2023 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lecture 11</title>
+  <dc:creator>O2</dc:creator>
+  <link>https://rmathematics-qmd.netlify.app/Rstudy/lec11/lec11.html</link>
+  <description><![CDATA[ <section id="차례" class="level3"><h3 class="anchored" data-anchor-id="차례">차례</h3>
+<ul>
+<li><p>list 만들기</p></li>
+<li><p>list index</p></li>
+<li><p>sublist</p></li>
+<li><p>pre-allocate</p></li>
+</ul>
+<ol type="1">
+<li><strong>list 만들기</strong></li>
+</ol>
+<p><code>list</code> 는 모든 타입을 원소로 가질 수 있다.</p>
+<p>cf) 벡터는 같은 타입끼리만 생성 가능!</p>
+<div class="cell">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">2</span>,<span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span>,<span class="st" style="color: #20794D;">"abc"</span>,<span class="va" style="color: #111111;">mean</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># 모든 자료형을 가질 수 있다. </span></span>
+<span><span class="va" style="color: #111111;">li</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] "abc"
+
+[[3]]
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># list에 이름부여</span></span>
+<span><span class="va" style="color: #111111;">li_name</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op" style="color: #5E5E5E;">(</span>a <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">2</span>,<span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span>, b <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">'a'</span>,<span class="st" style="color: #20794D;">'b'</span>,<span class="st" style="color: #20794D;">'c'</span><span class="op" style="color: #5E5E5E;">)</span>, c <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">mean</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">li_name</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$a
+[1] 1 2 3
+
+$b
+[1] "a" "b" "c"
+
+$c
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><strong>list index</strong></li>
+</ol>
+<ul class="task-list">
+<li>
+<input type="checkbox" disabled="">
+, [ [ ] ] 이용</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] "abc"
+
+[[3]]
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1번째 list </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1번째 list에 속해 있는 숫자형 벡터</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 2번째 list</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "abc"</code></pre>
+</div>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 2번째 list에 속해 있는 문자형 벡터</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "abc"</code></pre>
+</div>
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 3번째 list</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 3번째 list에 속해 있는 function </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1번째 list에 속해 있는 숫자형벡터 中 1번째 index</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode" id="cb21" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1번째 list에 속해 있는 숫자형벡터 中 2번째 index</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode" id="cb23" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1번째 list에 속해 있는 숫자형벡터 中 3번째 index</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode" id="cb25" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$a
+[1] 1 2 3
+
+$b
+[1] "a" "b" "c"
+
+$c
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb27" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$a
+[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb29" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$b
+[1] "a" "b" "c"</code></pre>
+</div>
+<div class="sourceCode" id="cb31" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$c
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb33" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb35" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode" id="cb37" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># list에 이름이 주어졌을 떄!</span></span>
+<span><span class="co" style="color: #5E5E5E;"># 숫자 대신에 이름을 기입하면 된다! (단, 문자형이라면 ' '(따옴표) 처리를 해야한다.)</span></span>
+<span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[[</span><span class="st" style="color: #20794D;">'a'</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb39" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">a</span> </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb41" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[[</span><span class="st" style="color: #20794D;">'b'</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b" "c"</code></pre>
+</div>
+<div class="sourceCode" id="cb43" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">b</span> </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b" "c"</code></pre>
+</div>
+<div class="sourceCode" id="cb45" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[[</span><span class="st" style="color: #20794D;">'c'</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb47" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">c</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb49" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode" id="cb51" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">[[</span><span class="st" style="color: #20794D;">'a'</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode" id="cb53" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_name</span><span class="op" style="color: #5E5E5E;">$</span><span class="va" style="color: #111111;">a</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li><strong>sublist</strong></li>
+</ol>
+<p><strong>list</strong>에서 sub 뽑아도 <strong>list</strong> 이다.</p>
+<ul>
+<li><p>list[ ]: list 한 덩어리이다. (<strong>list</strong>)</p></li>
+<li><p>list[[ ]]: list 내의 벡터이다.(<strong>원소</strong>)</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb55" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] "abc"
+
+[[3]]
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb57" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span> </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb59" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># list </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+<div class="sourceCode" id="cb61" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+<div class="sourceCode" id="cb63" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># numeric vector</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode" id="cb65" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+<div class="sourceCode" id="cb67" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/mode.html">mode</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># function </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "function"</code></pre>
+</div>
+<div class="sourceCode" id="cb69" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1~2번째 list </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] "abc"</code></pre>
+</div>
+<div class="sourceCode" id="cb71" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">]</span> <span class="co" style="color: #5E5E5E;"># 1,3번째 list </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3
+
+[[2]]
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb73" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">li_sub</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">[</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">]</span></span>
+<span><span class="va" style="color: #111111;">li_sub</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3
+
+[[2]]
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb75" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">li</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode" id="cb77" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">li_sub</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li><strong>pre-allocate</strong></li>
+</ol>
+<ul>
+<li><p>‘미리 만들어 놓는다’ 라는 의미이다.</p></li>
+<li><p><strong>list</strong>를 만들고 이후에 data를 넣는다.</p></li>
+<li><p>속도향상 및 for 구문 등에 활용!</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb79" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># 빈 list </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code><a href="https://rdrr.io/r/base/list.html">list()</a></code></pre>
+</div>
+<div class="sourceCode" id="cb81" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">lst</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">'list'</span>,<span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span> </span>
+<span><span class="va" style="color: #111111;">lst</span> <span class="co" style="color: #5E5E5E;"># 빈 리스트가 3개 </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+NULL
+
+[[2]]
+NULL
+
+[[3]]
+NULL</code></pre>
+</div>
+<div class="sourceCode" id="cb83" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">lst</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">2</span>,<span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span> <span class="co" style="color: #5E5E5E;"># 1번째 list에 속해 있는 vector</span></span>
+<span><span class="va" style="color: #111111;">lst</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="st" style="color: #20794D;">'abc'</span> <span class="co" style="color: #5E5E5E;"># 2번째 list에 속해 있는 vector</span></span>
+<span><span class="va" style="color: #111111;">lst</span><span class="op" style="color: #5E5E5E;">[[</span><span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">mean</span> <span class="co" style="color: #5E5E5E;"># 3번째 list에 속해 있는 function</span></span>
+<span><span class="va" style="color: #111111;">lst</span> </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] "abc"
+
+[[3]]
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+</div>
+<div class="sourceCode" id="cb85" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 만약 list안에 새로운 list를 만들고 싶다면, 아래와 같이 코드를 기입하면 된다. </span></span>
+<span><span class="va" style="color: #111111;">lst</span><span class="op" style="color: #5E5E5E;">[[</span><span class="st" style="color: #20794D;">'a'</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">]</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">4</span>,<span class="fl" style="color: #AD0000;">5</span>,<span class="fl" style="color: #AD0000;">6</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">lst</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] "abc"
+
+[[3]]
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x00000288febf00e0&gt;
+&lt;environment: namespace:base&gt;
+
+$a
+[1] 4 5 6</code></pre>
+</div>
+</div>
+
+
+</section> ]]></description>
+  <guid>https://rmathematics-qmd.netlify.app/Rstudy/lec11/lec11.html</guid>
+  <pubDate>Tue, 10 Jan 2023 15:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Lecture 10</title>
   <dc:creator>O2</dc:creator>

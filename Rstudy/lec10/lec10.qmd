@@ -9,7 +9,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-### 차례 
+### 차례
 
 1.  array 만들기
 
@@ -17,7 +17,7 @@ editor_options:
 
 2.  array index(인덱스)
 
-1.  **array만들기**
+3.  **array만들기**
 
 **array : 행과 열, Page를 가지는 3차원 구조**
 

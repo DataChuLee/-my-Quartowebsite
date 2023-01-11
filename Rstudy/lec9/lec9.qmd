@@ -9,7 +9,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-### 차례 
+### 차례
 
 -   매트릭스 이름 짓기 : rownames( ), colnames( )
 

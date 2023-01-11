@@ -1,0 +1,131 @@
+---
+title: Lecture 11
+date: '2023-01-11'
+description: 'list : 생성, index, sublist, pre-allocate'
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### 차례
+
+-   list 만들기
+
+-   list index
+
+-   sublist
+
+-   pre-allocate
+
+1.  **list 만들기**
+
+`list` 는 모든 타입을 원소로 가질 수 있다.
+
+cf) 벡터는 같은 타입끼리만 생성 가능!
+
+```{r}
+li <- list(c(1,2,3),"abc",mean) # 모든 자료형을 가질 수 있다. 
+li
+
+# list에 이름부여
+li_name <- list(a = c(1,2,3), b = c('a','b','c'), c = mean)
+li_name
+```
+
+2.  **list index**
+
+-   [ ] , \[ \[ \] \] 이용
+
+```{r}
+li
+
+li[1] # 1번째 list 
+li[[1]] # 1번째 list에 속해 있는 숫자형 벡터
+
+li[2] # 2번째 list
+li[[2]] # 2번째 list에 속해 있는 문자형 벡터
+
+li[3] # 3번째 list
+li[[3]] # 3번째 list에 속해 있는 function 
+
+li[[1]][1] # 1번째 list에 속해 있는 숫자형벡터 中 1번째 index
+li[[1]][2] # 1번째 list에 속해 있는 숫자형벡터 中 2번째 index
+li[[1]][3] # 1번째 list에 속해 있는 숫자형벡터 中 3번째 index
+
+li_name
+li_name[1]
+li_name[2]
+li_name[3]
+li_name[[1]]
+li_name[[1]][2]
+
+# list에 이름이 주어졌을 떄!
+# 숫자 대신에 이름을 기입하면 된다! (단, 문자형이라면 ' '(따옴표) 처리를 해야한다.)
+li_name[['a']] 
+li_name$a 
+
+li_name[['b']] 
+li_name$b 
+
+li_name[['c']]
+li_name$c
+
+li_name[[1]][2]
+li_name[['a']][2]
+li_name$a[2]
+```
+
+3.  **sublist**
+
+**list**에서 sub 뽑아도 **list** 이다.
+
+-   list\[ \]: list 한 덩어리이다. (**list**)
+
+-   list\[\[ \]\]: list 내의 벡터이다.(**원소**)
+
+```{r}
+li
+li[1] 
+mode(li[1]) # list 
+
+li[[1]]
+mode(li[[1]]) # numeric vector
+
+mode(li[3])
+mode(li[[3]]) # function 
+
+li[1:2] # 1~2번째 list 
+li[c(1,3)] # 1,3번째 list 
+   
+li_sub <- li[c(1,3)]
+li_sub
+
+length(li)
+length(li_sub)
+```
+
+4.  **pre-allocate**
+
+-   '미리 만들어 놓는다' 라는 의미이다.
+
+-   **list**를 만들고 이후에 data를 넣는다.
+
+-   속도향상 및 for 구문 등에 활용!
+
+```{r}
+list() # 빈 list 
+
+lst <- vector('list',3) 
+lst # 빈 리스트가 3개 
+
+lst[[1]] <- c(1,2,3) # 1번째 list에 속해 있는 vector
+lst[[2]] <- 'abc' # 2번째 list에 속해 있는 vector
+lst[[3]] <- mean # 3번째 list에 속해 있는 function
+lst 
+
+# 만약 list안에 새로운 list를 만들고 싶다면, 아래와 같이 코드를 기입하면 된다. 
+lst[['a']] <- c(4,5,6)
+lst
+```
