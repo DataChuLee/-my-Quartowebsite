@@ -1,0 +1,105 @@
+---
+title: Lecture 15
+date: '2023-01-15'
+description: 'for 문, while 문'
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### 차례
+
+-   for 문
+
+-   while 문
+
+1.  **for 문**
+
+**for (name in vector) statement 1**
+
+name : 반복문에 사용할 변수 이름(보통 i 사용!) / 반드시 in 포함 해야된다.
+
+vector : 보통 index vector 사용한다.
+
+vector 대신 list 가능! -- but 구조가 복잡해서 보통 vector 사용한다.
+
+-   **짝수만 출력**
+
+```{r}
+x <- c(1,2,3,4,5,6,7,8,9,10)
+x
+length(x)
+
+for (i in 1:length(x)) {
+  if (x[i] %% 2 ==0)
+    print(i)
+}
+```
+
+-   **짝수만 있는 벡터 만들기**
+
+```{r}
+x <- c(1,2,3,4,5,6,7,8,9,10)
+x
+length(x)
+
+result <- c()
+for (i in 1:length(x)){
+  if (x[i] %% 2 ==0)
+    result <- c(result,x[i])
+}
+result
+```
+
+-   **data.frame에 적용하기** : women 데이터
+
+height가 평균보다 크면 A 아니면 B 표시하기 (새로운 열 생성)
+
+```{r}
+women
+mean(women$height)
+nrow(women)
+
+women$height_rank <- ""
+women
+
+for (i in 1:nrow(women)){
+  if (women[i,1] > mean(women$height)){
+    women[i,3] <- 'A'
+  } else {
+    women[i,3] <- 'B'
+  }
+}
+women
+```
+
+2.  **while 구문**
+
+초기값 설정(ex. i \<-1)
+
+break: 종료 의미
+
+-   **5\*4\*3\*2\*1 표현하기**
+
+```{r}
+i <- 5
+x <- 1
+while (i > 0) {
+  x <- x * i
+  i <- i-1
+}
+```
+
+-   **2 + 3 + 4 + 5 표현하기**
+
+```{r}
+i <- 2
+x <- 0
+while(i <=5){
+  x <- x + i 
+  i <- i + 1
+}
+x
+```
