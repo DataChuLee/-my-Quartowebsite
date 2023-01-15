@@ -1,0 +1,14 @@
+{
+  "hash": "7c7ec6f7ed51017020fbb9229638576f",
+  "result": {
+    "markdown": "---\ntitle: Lecture 17\ndate: '2023-01-16'\ndescription: '연산자 만들기, return 함수'\nexecute: \n  message: false\n  warning: false\neditor_options: \n  chunk_output_type: console\n---\n\n\n### 차례 \n\n-   연산자 만들기 : %anything%\n\n-   return 함수\n\n### 연산자 만들기\n\n`%anything%`\n\n-   이 자체가 연산자 역할을 한다.\n\n-   기존의 연산자 : %\\*% (행렬 곱), %/%(몫), %o%(outer)\n\n**신뢰구간 예시**\n\n\n::: {.cell}\n\n```{.r .cell-code}\n'%+-%' <- function(x, margin){\n  x + c(-1,1)*margin\n}\n\n100 %+-% (1.96)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1]  98.04 101.96\n```\n:::\n\n```{.r .cell-code}\n100 %+-% (1.96*2)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1]  96.08 103.92\n```\n:::\n\n```{.r .cell-code}\n100 %+-% (1.96*10)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1]  80.4 119.6\n```\n:::\n:::\n\n\n### return 함수 \n\n-   **return( ) 함수를 왜 사용해야 하는지, return( ) 함수 유무에 따라 어떤 차이가 있는지 아래에서 설명하겠다.**\n\n**설명을 위해 숫자 2개 곱하기 함수를 만들고 return 함수 유무에 따른 차이를 비교해 보겠다. return( ) 사용 유무의 차이는 결과값을 변수에 저장해 보면 알 수 있으며, 아래에서는 단순 출력과 저장 후 출력의 차이를 비교해 설명할 것이다.**\n\n### return( )함수를 사용한 정상적인 사용자 함수\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# 함수 생성 \nmulti_two_return <- function(x,y){\n  res <- x*y\n  return(res)\n}\n\n# 함수 호출 \nmulti_two_return(5,9)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 45\n```\n:::\n\n```{.r .cell-code}\n# 변수 저장 후 출력\n# 결과를 보면 위에서와 같이 동일하게 45 라는 계산값이 정상 출력되는 것을 볼 수 있다. \nres1 <- multi_two_return(5,9)\nres1\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 45\n```\n:::\n:::\n\n\n### return() 함수를 사용하지 않은 함수\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmulti_two_cat <- function(x,y){\n  res <- x*y\n  cat(res)\n}\n\n# 함수 호출\nmulti_two_cat(5,9)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n45\n```\n:::\n\n```{.r .cell-code}\n# 변수 저장 후 출력\n# 결과값을 res2에 저장하는 코드를 실행하였더니 변수를 호출하지 않았는데도 45라는 결과값이 출력되는 것을 볼 수 있다.\nres2 <- multi_two_cat(5,9)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n45\n```\n:::\n\n```{.r .cell-code}\n# res2 변수를 호출해 보니 NULL이 출력되었다. \nres2\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nNULL\n```\n:::\n:::\n\n\n### 결과 비교\n\n위 결과에서 함수를 호출하여 **단순 출력했을 경우** 45로 결과값이 동일하게 출력되는 것을 볼 수 있었으나, 변수 저장 후 출력 결과에서는 `return()과 cat()` 사용에 따라 차이가 있는 것을 볼 수 있다.\n\n`return( )`으로 만든 함수는 변수를 따로 출력하기 전에 값이 출력되지 않았다.\n\n`cat( )`으로 만든 함수는 저장해도 함수를 호출한 것처럼 바로 결과값이 출력된다.\n\n이는 `cat( )`함수는 단순히 결과값을 출력할 뿐 값을 함수 인자에 반환해주지 않기 때문이다.\n\n따라서 함수에서 계산된 값을 반환하여 변수에 저장하기 위해서는 `return( )`함수가 반드시 필요하다!\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

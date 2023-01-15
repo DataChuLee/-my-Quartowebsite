@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="O2">
+<meta name="dcterms.date" content="2023-01-16">
+<meta name="description" content="Project(프로젝트) 생성 및 관리 방법 상세 안내">
+
+<title>분석하는 O2 - Lecture 18</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script type="application/json" class="js-hypothesis-config">
+{
+  "theme": "clean",
+  "openSidebar": false
+}
+</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <img src="../.././img/logo.png" alt="">
+    <span class="navbar-title">분석하는 O2</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../Rstudy.html">R study</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html">Blog</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/DataChuLee"><i class="bi bi-github" role="img" aria-label="Github Of DataChu">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Lecture 18</h1>
+                  <div>
+        <div class="description">
+          Project(프로젝트) 생성 및 관리 방법 상세 안내
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>O2 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 16, 2023</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#차례" id="toc-차례" class="nav-link active" data-scroll-target="#차례">차례</a></li>
+  <li><a href="#프로젝트-생성-방법" id="toc-프로젝트-생성-방법" class="nav-link" data-scroll-target="#프로젝트-생성-방법">프로젝트 생성 방법</a></li>
+  <li><a href="#프로젝트-관리-방법" id="toc-프로젝트-관리-방법" class="nav-link" data-scroll-target="#프로젝트-관리-방법">프로젝트 관리 방법</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="차례" class="level3">
+<h3 class="anchored" data-anchor-id="차례">차례</h3>
+<ul>
+<li><p>프로젝트 생성 방법</p></li>
+<li><p>프로젝트 관리 방법</p></li>
+</ul>
+<p>R studio를 사용하지만, project를 사용하는 사람은 적다.</p>
+<p>알고 쓰면 편리하기에 쓴이는 많이 애용하고 있다.</p>
+</section>
+<section id="프로젝트-생성-방법" class="level3">
+<h3 class="anchored" data-anchor-id="프로젝트-생성-방법">프로젝트 생성 방법</h3>
+<p><strong>1) R studio 실행 - R studio 실행 초기 화면</strong></p>
+<p><img src="images/paste-8D25E6B9.png" class="img-fluid"></p>
+<p><strong>2)</strong> <strong>Project – New project</strong></p>
+<p><img src="images/paste-A5CE8882.png" class="img-fluid"></p>
+<p><strong>3) New Directory</strong></p>
+<p><img src="images/paste-4D0710FD.png" class="img-fluid"></p>
+<p><strong>4) Empty Project</strong></p>
+<p><img src="images/paste-040DAB34.png" class="img-fluid"></p>
+<p><strong>5) Browse (경로 지정) –&gt; Directory Name 지정</strong></p>
+<ul>
+<li><strong>앞으로 code나 data를 관리할 폴더를 지정</strong></li>
+</ul>
+<p><img src="images/paste-8A40A059.png" class="img-fluid"></p>
+</section>
+<section id="프로젝트-관리-방법" class="level3">
+<h3 class="anchored" data-anchor-id="프로젝트-관리-방법">프로젝트 관리 방법</h3>
+<p>해당 경로의 폴더에서 code 폴더 + data 폴더 생성</p>
+<ul>
+<li><p>code에서 R파일/data에는 R사용할 때 사용한 data 보관</p></li>
+<li><p>해당 사진은 data 폴더는 생략되어 있다.</p></li>
+<li><p>다른 컴퓨터나 USB에 파란색 아이콘(빨강 네모)는 꼭 들어가야 한다!</p></li>
+<li><p>저곳에 할당된 값들이 저장된다고 생각하면 된다.</p></li>
+<li><p>프로젝트 파일내의 파란색 아이콘을 더블클릭하면 R studio가 실행된다.</p></li>
+</ul>
+<p><img src="images/paste-F8F271C7.png" class="img-fluid"></p>
+<p>우측 하단의 <strong>File을 클릭하면,</strong></p>
+<p>폴더 검색 및 R코드를 자유롭게 불러 올 수 있다.</p>
+<p><img src="images/paste-6802087C.png" class="img-fluid"></p>
+<p><strong>R code를 저장하는 모습</strong></p>
+<p><strong>앞으로 R코드는 해당 프로젝트 파일 - code에 저장!</strong></p>
+<p><img src="images/paste-7F6E8A52.png" class="img-fluid"></p>
+<p>밑의 사진과 같이 저장된 R파일을 프로젝트에서 관리할 수 있음을 볼 수있다.</p>
+<p>프로젝트에서 관리할 수 있음을 볼 수 있다.</p>
+<ul>
+<li><p>해당 폴더에서 관리 할 수 있다.</p></li>
+<li><p>앞으로 이 프로젝트를 알집으로 압축하여 들고 다니면 된다.</p></li>
+<li><p>그러면 해당 할당된 값을 그대로 다른 컴퓨터에서 사용이 가능하다!</p></li>
+</ul>
+<p><img src="images/paste-2EFD2A01.png" class="img-fluid"></p>
+<p><img src="images/paste-B0F70F22.png" class="img-fluid"></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="DataChuLee/-my-Quartowebsite" data-repo-id="R_kgDOIsfm7Q" data-category="Comments" data-category-id="DIC_kwDOIsfm7c4CTWT5" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="ko" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

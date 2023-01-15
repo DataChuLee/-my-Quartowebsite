@@ -10,7 +10,287 @@
 <atom:link href="https://rmathematics-qmd.netlify.app/Rstudy.xml" rel="self" type="application/rss+xml"/>
 <description>O2 Qmd 블로그</description>
 <generator>quarto-1.0.36</generator>
-<lastBuildDate>Sat, 14 Jan 2023 15:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 15 Jan 2023 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>Lecture 16</title>
+  <dc:creator>O2</dc:creator>
+  <link>https://rmathematics-qmd.netlify.app/Rstudy/lec16/lec16.html</link>
+  <description><![CDATA[ <section id="r-함수-만들기-function" class="level3"><h3 class="anchored" data-anchor-id="r-함수-만들기-function">R 함수 만들기 function( )</h3>
+<p><strong>name &lt;- function(arg_1, arg_2) {expression}</strong></p>
+<ul>
+<li><p>name : 함수이름 입력 (+ 호출시 사용)</p></li>
+<li><p>expression : 만들 함수 구문</p></li>
+<li><p>arg : 변수 입력</p></li>
+</ul>
+<ol type="1">
+<li>
+<img src="https://latex.codecogs.com/png.latex?y%20=%20x%5E2+1"> 함수 만들기!</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="kw" style="color: #003B4F;">function</span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">{</span></span>
+<span>   <span class="va" style="color: #111111;">x</span><span class="op" style="color: #5E5E5E;">^</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">+</span><span class="fl" style="color: #AD0000;">1</span></span>
+<span><span class="op" style="color: #5E5E5E;">}</span></span>
+<span><span class="va" style="color: #111111;">y</span> <span class="co" style="color: #5E5E5E;"># y = x^2+1인 function이다. </span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function(x){
+   x^2+1
+}</code></pre>
+</div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;">y</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;">y</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">5</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 26</code></pre>
+</div>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;">y</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">10</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 101</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><strong>홀수, 짝수 구분 함수만들기!</strong></li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fl" style="color: #AD0000;">2</span></span>
+<span><span class="kw" style="color: #003B4F;">if</span> <span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl" style="color: #AD0000;">2</span> <span class="op" style="color: #5E5E5E;">==</span><span class="fl" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">)</span> <span class="st" style="color: #20794D;">"짝수"</span> <span class="kw" style="color: #003B4F;">else</span> <span class="st" style="color: #20794D;">"홀수"</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "짝수"</code></pre>
+</div>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fl" style="color: #AD0000;">5</span></span>
+<span><span class="kw" style="color: #003B4F;">if</span> <span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl" style="color: #AD0000;">2</span> <span class="op" style="color: #5E5E5E;">==</span><span class="fl" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">)</span> <span class="st" style="color: #20794D;">"짝수"</span> <span class="kw" style="color: #003B4F;">else</span> <span class="st" style="color: #20794D;">"홀수"</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "홀수"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="kw" style="color: #003B4F;">function</span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">{</span></span>
+<span>  <span class="kw" style="color: #003B4F;">if</span> <span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl" style="color: #AD0000;">2</span> <span class="op" style="color: #5E5E5E;">==</span><span class="fl" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">)</span> <span class="st" style="color: #20794D;">"짝수"</span> <span class="kw" style="color: #003B4F;">else</span> <span class="st" style="color: #20794D;">"홀수"</span></span>
+<span><span class="op" style="color: #5E5E5E;">}</span></span>
+<span><span class="fu" style="color: #4758AB;">y</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "짝수"</code></pre>
+</div>
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;">y</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">5</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "홀수"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">odd.even</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="kw" style="color: #003B4F;">function</span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">{</span></span>
+<span>  <span class="kw" style="color: #003B4F;">if</span> <span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl" style="color: #AD0000;">2</span> <span class="op" style="color: #5E5E5E;">==</span><span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">)</span> <span class="va" style="color: #111111;">result</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="st" style="color: #20794D;">"홀수"</span> <span class="kw" style="color: #003B4F;">else</span> <span class="va" style="color: #111111;">result</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="st" style="color: #20794D;">"짝수"</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">result</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;">}</span></span>
+<span></span>
+<span><span class="fu" style="color: #4758AB;">odd.even</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">2023</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "홀수"</code></pre>
+</div>
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;">odd.even</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">2022</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "짝수"</code></pre>
+</div>
+<div class="sourceCode" id="cb21" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;">odd.even</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1997</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "홀수"</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>변수 2개 : <img src="https://latex.codecogs.com/png.latex?y%20=%202x%20+%20z"> 만들기</li>
+</ol>
+<div class="cell">
+<div class="sourceCode" id="cb23" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">y</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="kw" style="color: #003B4F;">function</span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>,<span class="va" style="color: #111111;">z</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">{</span></span>
+<span>  <span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">*</span><span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="va" style="color: #111111;">z</span></span>
+<span><span class="op" style="color: #5E5E5E;">}</span></span>
+<span></span>
+<span><span class="fu" style="color: #4758AB;">y</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">0</span>,<span class="fl" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode" id="cb25" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;">y</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">2</span>,<span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+<div class="sourceCode" id="cb27" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;">y</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode" id="cb29" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu" style="color: #4758AB;">y</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">2</span>,<span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+
+
+</section> ]]></description>
+  <guid>https://rmathematics-qmd.netlify.app/Rstudy/lec16/lec16.html</guid>
+  <pubDate>Sun, 15 Jan 2023 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lecture 17</title>
+  <dc:creator>O2</dc:creator>
+  <link>https://rmathematics-qmd.netlify.app/Rstudy/lec17/lec17.html</link>
+  <description><![CDATA[ <section id="차례" class="level3"><h3 class="anchored" data-anchor-id="차례">차례</h3>
+<ul>
+<li><p>연산자 만들기 : %anything%</p></li>
+<li><p>return 함수</p></li>
+</ul></section><section id="연산자-만들기" class="level3"><h3 class="anchored" data-anchor-id="연산자-만들기">연산자 만들기</h3>
+<p><code>%anything%</code></p>
+<ul>
+<li><p>이 자체가 연산자 역할을 한다.</p></li>
+<li><p>기존의 연산자 : %*% (행렬 곱), %/%(몫), %o%(outer)</p></li>
+</ul>
+<p><strong>신뢰구간 예시</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="st" style="color: #20794D;">'%+-%'</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="kw" style="color: #003B4F;">function</span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>, <span class="va" style="color: #111111;">margin</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">{</span></span>
+<span>  <span class="va" style="color: #111111;">x</span> <span class="op" style="color: #5E5E5E;">+</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">-</span><span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">*</span><span class="va" style="color: #111111;">margin</span></span>
+<span><span class="op" style="color: #5E5E5E;">}</span></span>
+<span></span>
+<span><span class="fl" style="color: #AD0000;">100</span> <span class="op" style="color: #5E5E5E;">%+-%</span> <span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1.96</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  98.04 101.96</code></pre>
+</div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl" style="color: #AD0000;">100</span> <span class="op" style="color: #5E5E5E;">%+-%</span> <span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1.96</span><span class="op" style="color: #5E5E5E;">*</span><span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  96.08 103.92</code></pre>
+</div>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl" style="color: #AD0000;">100</span> <span class="op" style="color: #5E5E5E;">%+-%</span> <span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1.96</span><span class="op" style="color: #5E5E5E;">*</span><span class="fl" style="color: #AD0000;">10</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  80.4 119.6</code></pre>
+</div>
+</div>
+</section><section id="return-함수" class="level3"><h3 class="anchored" data-anchor-id="return-함수">return 함수</h3>
+<ul>
+<li><strong>return( ) 함수를 왜 사용해야 하는지, return( ) 함수 유무에 따라 어떤 차이가 있는지 아래에서 설명하겠다.</strong></li>
+</ul>
+<p><strong>설명을 위해 숫자 2개 곱하기 함수를 만들고 return 함수 유무에 따른 차이를 비교해 보겠다. return( ) 사용 유무의 차이는 결과값을 변수에 저장해 보면 알 수 있으며, 아래에서는 단순 출력과 저장 후 출력의 차이를 비교해 설명할 것이다.</strong></p>
+</section><section id="return-함수를-사용한-정상적인-사용자-함수" class="level3"><h3 class="anchored" data-anchor-id="return-함수를-사용한-정상적인-사용자-함수">return( )함수를 사용한 정상적인 사용자 함수</h3>
+<div class="cell">
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 함수 생성 </span></span>
+<span><span class="va" style="color: #111111;">multi_two_return</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="kw" style="color: #003B4F;">function</span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>,<span class="va" style="color: #111111;">y</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">{</span></span>
+<span>  <span class="va" style="color: #111111;">res</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">x</span><span class="op" style="color: #5E5E5E;">*</span><span class="va" style="color: #111111;">y</span></span>
+<span>  <span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">res</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;">}</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># 함수 호출 </span></span>
+<span><span class="fu" style="color: #4758AB;">multi_two_return</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">5</span>,<span class="fl" style="color: #AD0000;">9</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45</code></pre>
+</div>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 변수 저장 후 출력</span></span>
+<span><span class="co" style="color: #5E5E5E;"># 결과를 보면 위에서와 같이 동일하게 45 라는 계산값이 정상 출력되는 것을 볼 수 있다. </span></span>
+<span><span class="va" style="color: #111111;">res1</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;">multi_two_return</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">5</span>,<span class="fl" style="color: #AD0000;">9</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">res1</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45</code></pre>
+</div>
+</div>
+</section><section id="return-함수를-사용하지-않은-함수" class="level3"><h3 class="anchored" data-anchor-id="return-함수를-사용하지-않은-함수">return() 함수를 사용하지 않은 함수</h3>
+<div class="cell">
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">multi_two_cat</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="kw" style="color: #003B4F;">function</span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">x</span>,<span class="va" style="color: #111111;">y</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">{</span></span>
+<span>  <span class="va" style="color: #111111;">res</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">x</span><span class="op" style="color: #5E5E5E;">*</span><span class="va" style="color: #111111;">y</span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">res</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="op" style="color: #5E5E5E;">}</span></span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># 함수 호출</span></span>
+<span><span class="fu" style="color: #4758AB;">multi_two_cat</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">5</span>,<span class="fl" style="color: #AD0000;">9</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>45</code></pre>
+</div>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 변수 저장 후 출력</span></span>
+<span><span class="co" style="color: #5E5E5E;"># 결과값을 res2에 저장하는 코드를 실행하였더니 변수를 호출하지 않았는데도 45라는 결과값이 출력되는 것을 볼 수 있다.</span></span>
+<span><span class="va" style="color: #111111;">res2</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;">multi_two_cat</span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">5</span>,<span class="fl" style="color: #AD0000;">9</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>45</code></pre>
+</div>
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># res2 변수를 호출해 보니 NULL이 출력되었다. </span></span>
+<span><span class="va" style="color: #111111;">res2</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+</section><section id="결과-비교" class="level3"><h3 class="anchored" data-anchor-id="결과-비교">결과 비교</h3>
+<p>위 결과에서 함수를 호출하여 <strong>단순 출력했을 경우</strong> 45로 결과값이 동일하게 출력되는 것을 볼 수 있었으나, 변수 저장 후 출력 결과에서는 <code>return()과 cat()</code> 사용에 따라 차이가 있는 것을 볼 수 있다.</p>
+<p><code><a href="https://rdrr.io/r/base/function.html">return( )</a></code>으로 만든 함수는 변수를 따로 출력하기 전에 값이 출력되지 않았다.</p>
+<p><code><a href="https://rdrr.io/r/base/cat.html">cat( )</a></code>으로 만든 함수는 저장해도 함수를 호출한 것처럼 바로 결과값이 출력된다.</p>
+<p>이는 <code><a href="https://rdrr.io/r/base/cat.html">cat( )</a></code>함수는 단순히 결과값을 출력할 뿐 값을 함수 인자에 반환해주지 않기 때문이다.</p>
+<p>따라서 함수에서 계산된 값을 반환하여 변수에 저장하기 위해서는 <code><a href="https://rdrr.io/r/base/function.html">return( )</a></code>함수가 반드시 필요하다!</p>
+
+
+</section> ]]></description>
+  <guid>https://rmathematics-qmd.netlify.app/Rstudy/lec17/lec17.html</guid>
+  <pubDate>Sun, 15 Jan 2023 15:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lecture 18</title>
+  <dc:creator>O2</dc:creator>
+  <link>https://rmathematics-qmd.netlify.app/Rstudy/lec18/lec18.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="차례" class="level3">
+<h3 class="anchored" data-anchor-id="차례">차례</h3>
+<ul>
+<li><p>프로젝트 생성 방법</p></li>
+<li><p>프로젝트 관리 방법</p></li>
+</ul>
+<p>R studio를 사용하지만, project를 사용하는 사람은 적다.</p>
+<p>알고 쓰면 편리하기에 쓴이는 많이 애용하고 있다.</p>
+</section>
+<section id="프로젝트-생성-방법" class="level3">
+<h3 class="anchored" data-anchor-id="프로젝트-생성-방법">프로젝트 생성 방법</h3>
+<p><strong>1) R studio 실행 - R studio 실행 초기 화면</strong></p>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-8D25E6B9.png" class="img-fluid"></p>
+<p><strong>2)</strong> <strong>Project – New project</strong></p>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-A5CE8882.png" class="img-fluid"></p>
+<p><strong>3) New Directory</strong></p>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-4D0710FD.png" class="img-fluid"></p>
+<p><strong>4) Empty Project</strong></p>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-040DAB34.png" class="img-fluid"></p>
+<p><strong>5) Browse (경로 지정) –&gt; Directory Name 지정</strong></p>
+<ul>
+<li><strong>앞으로 code나 data를 관리할 폴더를 지정</strong></li>
+</ul>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-8A40A059.png" class="img-fluid"></p>
+</section>
+<section id="프로젝트-관리-방법" class="level3">
+<h3 class="anchored" data-anchor-id="프로젝트-관리-방법">프로젝트 관리 방법</h3>
+<p>해당 경로의 폴더에서 code 폴더 + data 폴더 생성</p>
+<ul>
+<li><p>code에서 R파일/data에는 R사용할 때 사용한 data 보관</p></li>
+<li><p>해당 사진은 data 폴더는 생략되어 있다.</p></li>
+<li><p>다른 컴퓨터나 USB에 파란색 아이콘(빨강 네모)는 꼭 들어가야 한다!</p></li>
+<li><p>저곳에 할당된 값들이 저장된다고 생각하면 된다.</p></li>
+<li><p>프로젝트 파일내의 파란색 아이콘을 더블클릭하면 R studio가 실행된다.</p></li>
+</ul>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-F8F271C7.png" class="img-fluid"></p>
+<p>우측 하단의 <strong>File을 클릭하면,</strong></p>
+<p>폴더 검색 및 R코드를 자유롭게 불러 올 수 있다.</p>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-6802087C.png" class="img-fluid"></p>
+<p><strong>R code를 저장하는 모습</strong></p>
+<p><strong>앞으로 R코드는 해당 프로젝트 파일 - code에 저장!</strong></p>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-7F6E8A52.png" class="img-fluid"></p>
+<p>밑의 사진과 같이 저장된 R파일을 프로젝트에서 관리할 수 있음을 볼 수있다.</p>
+<p>프로젝트에서 관리할 수 있음을 볼 수 있다.</p>
+<ul>
+<li><p>해당 폴더에서 관리 할 수 있다.</p></li>
+<li><p>앞으로 이 프로젝트를 알집으로 압축하여 들고 다니면 된다.</p></li>
+<li><p>그러면 해당 할당된 값을 그대로 다른 컴퓨터에서 사용이 가능하다!</p></li>
+</ul>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-2EFD2A01.png" class="img-fluid"></p>
+<p><img src="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-B0F70F22.png" class="img-fluid"></p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://rmathematics-qmd.netlify.app/Rstudy/lec18/lec18.html</guid>
+  <pubDate>Sun, 15 Jan 2023 15:00:00 GMT</pubDate>
+  <media:content url="https://rmathematics-qmd.netlify.app/Rstudy/lec18/images/paste-8D25E6B9.png" medium="image" type="image/png" height="83" width="144"/>
+</item>
 <item>
   <title>Lecture 13</title>
   <dc:creator>O2</dc:creator>

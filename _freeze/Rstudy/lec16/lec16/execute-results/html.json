@@ -1,0 +1,14 @@
+{
+  "hash": "c885c92bb6148106c6ee88fb9b1136c0",
+  "result": {
+    "markdown": "---\ntitle: Lecture 16\ndate: '2023-01-16'\ndescription: '함수만들기 function()'\nexecute: \n  message: false\n  warning: false\neditor_options: \n  chunk_output_type: console\n---\n\n\n### R 함수 만들기 function( )\n\n**name \\<- function(arg_1, arg_2) {expression}**\n\n-   name : 함수이름 입력 (+ 호출시 사용)\n\n-   expression : 만들 함수 구문\n\n-   arg : 변수 입력\n\n1.  $y = x^2+1$ 함수 만들기!\n\n\n::: {.cell}\n\n```{.r .cell-code}\ny <- function(x){\n   x^2+1\n}\ny # y = x^2+1인 function이다. \n```\n\n::: {.cell-output .cell-output-stdout}\n```\nfunction(x){\n   x^2+1\n}\n```\n:::\n\n```{.r .cell-code}\ny(0)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 1\n```\n:::\n\n```{.r .cell-code}\ny(5)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 26\n```\n:::\n\n```{.r .cell-code}\ny(10)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 101\n```\n:::\n:::\n\n\n2.  **홀수, 짝수 구분 함수만들기!**\n\n\n::: {.cell}\n\n```{.r .cell-code}\nx <- 2\nif (x %% 2 ==0) \"짝수\" else \"홀수\"\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"짝수\"\n```\n:::\n\n```{.r .cell-code}\nx <- 5\nif (x %% 2 ==0) \"짝수\" else \"홀수\"\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"홀수\"\n```\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\ny <- function(x){\n  if (x %% 2 ==0) \"짝수\" else \"홀수\"\n}\ny(2)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"짝수\"\n```\n:::\n\n```{.r .cell-code}\ny(5)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"홀수\"\n```\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nodd.even <- function(x){\n  if (x %% 2 ==1) result <- \"홀수\" else result <- \"짝수\"\n  print(result)\n}\n\nodd.even(2023)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"홀수\"\n```\n:::\n\n```{.r .cell-code}\nodd.even(2022)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"짝수\"\n```\n:::\n\n```{.r .cell-code}\nodd.even(1997)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"홀수\"\n```\n:::\n:::\n\n\n3.   변수 2개 : $y = 2x + z$ 만들기\n\n\n::: {.cell}\n\n```{.r .cell-code}\ny <- function(x,z){\n  2*x + z\n}\n\ny(0,0)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 0\n```\n:::\n\n```{.r .cell-code}\ny(2,2)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 6\n```\n:::\n\n```{.r .cell-code}\ny(1,3)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 5\n```\n:::\n\n```{.r .cell-code}\ny(2,1)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] 5\n```\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
