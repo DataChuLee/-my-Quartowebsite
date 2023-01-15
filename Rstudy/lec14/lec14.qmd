@@ -1,0 +1,121 @@
+---
+title: Lecture 14
+date: '2023-01-15'
+description: 'if문, elseif문'
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### 차례
+
+-   group expression : { }
+
+-   if 문
+
+    -   조건 2개, 조건 3개 이상
+
+-   elseif 문
+
+1.  **group expression : { }**
+
+-   **중괄호**{ } : 한 번에 명령 수행하고자 할 때 사용한다.
+
+```{r}
+{
+  a <- 1
+  b <- c(1,2,3)
+  a+b
+}
+
+# 또 다른 예시(한 번에 명령 실행)
+# 개인적으로 중괄호 사용하는 것이 더 편하고 가독성이 좋다고 생각한다.
+a <- 1 ; b <- c(1,2,3) ; a+b
+```
+
+2.  **if문**
+
+**if (조건){성공 시 실행될 식} else {실패 시 실행될 식}**
+
+-   **조건 2개**
+
+```{r}
+# %% : 나머지
+if (4 %% 2 ==0) "짝수" else "홀수"
+
+if (5 %% 2 ==0) "짝수" else "홀수"
+
+x <-20
+if (x %% 2 ==0) "짝수" else "홀수"
+```
+
+-   **조건 3개 이상 : if ( ){ } else if ( ) { } else{ }**
+
+```{r}
+x <- 100
+if (x %% 3 ==0) {
+  y <- "3의 배수"
+  print(y)
+  } else if (x %% 3 ==1){
+    y <- "나머지 1"
+    print(y)
+    } else {
+      y <- "나머지 2"
+      print(y)
+    }
+
+
+x <- 101
+if (x %% 3 ==0){
+  y <- "3의 배수"
+  print(y)
+} else if (x %% 3 ==1){
+  y <- "나머지 1"
+  print(y)
+} else {
+  y <- "나머지 2"
+  print(y)
+}
+
+x <- 102
+if (x %% 3 ==0){
+  y <- "3의 배수"
+  print(y)
+} else if (x %% 3 ==1){
+  y <- "나머지 1"
+  print(y)
+} else {
+  y <- "나머지 2"
+  print(y)
+}
+```
+
+3.  **ifelse(condition, expression1,expression2)**
+
+```{r}
+x <- c(1,2,3,4,5)
+ifelse(x %% 2 ==0, "짝수","홀수")
+```
+
+4.  **실습(Feat. women data)**
+
+```{r}
+women
+
+# height 60미만: A
+# height 60~70 미만: B 
+# height 70이상 : C
+ifelse(women$height >= 70, 'C',
+       ifelse(women$height >= 60, 'B','A'))
+
+# 실제 데이터에는 반영되지 않았다.
+women 
+
+women$height_rank <-ifelse(women$height >= 70, 'A',
+       ifelse(women$height >= 60, 'B','C'))
+
+# 변수에 할당을 해줘야 데이터에 반영되는 것을 알 수 있다. 
+women  
+```

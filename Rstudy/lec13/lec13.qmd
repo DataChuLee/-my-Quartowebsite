@@ -1,0 +1,78 @@
+---
+title: Lecture 13
+date: '2023-01-15'
+description: '데이터 변환과 편집'
+execute: 
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+### 차례
+
+-   데이터 변환: dim( ) , unlist( )
+
+-   \[\] 와 \[\[ \]\]
+
+-   데이터 편집 : eidt( )
+
+1.  **데이터 변환: dim( )**
+
+-   **벡터 --\> 메트릭스**
+
+```{r}
+a <- 1:6
+a
+
+dim(a) <- c(2,3) # 2행 3열로 만들기
+a
+```
+
+-   **메트릭스 --\> 벡터**
+
+```{r}
+a 
+dim(a) <- NULL # a는 2행 3열로 이루어진 행렬이였는데, 차원을 없앤 것.
+
+a # 다시 벡터 형태로 돌아갔다. 
+```
+
+2.  **\[\] 와 \[\[\]\]**
+
+**women data(내장 데이터)**
+
+```{r}
+data(women)
+str(women)
+
+## [[]]:그 안의 값을 가지고 온다.
+col1 <- women[[1]] 
+str(col1) # 숫자형 벡터로 출력된다.
+
+mean(col1)
+
+## [ ]:sub으로 가지고 온다. 
+col2 <- women[1]
+str(col2) # data.frmae으로 출력 된다. 
+
+mean(col2)
+```
+
+-   **unlist( ): vector로 만든다.**
+
+```{r}
+col3 <- unlist(col2) # 구조가 data.frmae인 col2를 vector로 만들어 줘!
+str(col3)
+
+mean(col3)
+```
+
+3.  **데이터 편집: edit( )**
+
+-   직접 입력하여 데이터를 수정/편집 할 수 있다.
+
+```{r}
+head(women)
+edit(women)
+```
