@@ -9,7 +9,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-### 차례 
+### 차례
 
 -   연산자 만들기 : %anything%
 
@@ -37,7 +37,7 @@ editor_options:
 100 %+-% (1.96*10)
 ```
 
-### return 함수 
+### return 함수
 
 -   **return( ) 함수를 왜 사용해야 하는지, return( ) 함수 유무에 따라 어떤 차이가 있는지 아래에서 설명하겠다.**
 

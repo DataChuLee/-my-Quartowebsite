@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="O2">
+<meta name="dcterms.date" content="2023-01-20">
+<meta name="description" content="tidyverse intro &amp; 맛보기">
+<title>분석하는 O2 - R tidyverse lec1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<script type="application/json" class="js-hypothesis-config">
+{
+  "theme": "clean",
+  "openSidebar": false
+}
+</script><script async="" src="https://hypothes.is/embed.js"></script>
+</head>
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <img src="../.././img/logo.png" alt=""><span class="navbar-title">분석하는 O2</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../../Rstudy.html">R study</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../Rtidyverse.html">R tidyverse</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog/index.html">Blog</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/DataChuLee"><i class="bi bi-github" role="img" aria-label="Github Of DataChu">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../blog/index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+<div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">R tidyverse lec1</h1>
+                  <div>
+        <div class="description">
+          tidyverse intro &amp; 맛보기
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>O2 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 20, 2023</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#tidyverse%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC" id="toc-tidyverse에-대하여" class="nav-link active" data-scroll-target="#tidyverse%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC">Tidyverse에 대하여</a></li>
+  <li><a href="#%ED%95%B5%EC%8B%AC-%EA%B5%AC%EC%84%B1-%EC%9A%94%EC%86%8C" id="toc-핵심-구성-요소" class="nav-link" data-scroll-target="#%ED%95%B5%EC%8B%AC-%EA%B5%AC%EC%84%B1-%EC%9A%94%EC%86%8C">핵심 구성 요소</a></li>
+  <li><a href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%A7%9B%EB%B3%B4%EA%B8%B0" id="toc-데이터-맛보기" class="nav-link" data-scroll-target="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%A7%9B%EB%B3%B4%EA%B8%B0">데이터 맛보기</a></li>
+  <li><a href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%8C%8C%EC%9D%BC-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0" id="toc-데이터-파일-불러오기" class="nav-link" data-scroll-target="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%8C%8C%EC%9D%BC-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0">데이터 파일 불러오기</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%99%80-%EC%B9%9C%ED%95%B4%EC%A7%80%EA%B8%B0" id="toc-데이터와-친해지기" class="nav-link" data-scroll-target="#%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%99%80-%EC%B9%9C%ED%95%B4%EC%A7%80%EA%B8%B0">데이터와 친해지기</a></li>
+  <li><a href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%80%EC%88%98-%EC%9D%B4%EB%A6%84-%EB%B0%94%EA%BE%B8%EA%B8%B0" id="toc-데이터-변수-이름-바꾸기" class="nav-link" data-scroll-target="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%80%EC%88%98-%EC%9D%B4%EB%A6%84-%EB%B0%94%EA%BE%B8%EA%B8%B0">데이터 변수 이름 바꾸기</a></li>
+  <li><a href="#dplyr-%ED%8C%A8%ED%82%A4%EC%A7%80%EA%B8%B0%EB%B3%B8-%EB%8F%99%EC%82%AC-%ED%95%99%EC%8A%B5" id="toc-dplyr-패키지기본-동사-학습" class="nav-link" data-scroll-target="#dplyr-%ED%8C%A8%ED%82%A4%EC%A7%80%EA%B8%B0%EB%B3%B8-%EB%8F%99%EC%82%AC-%ED%95%99%EC%8A%B5"><code>dplyr</code> 패키지(기본 동사 학습)</a></li>
+  <li><a href="#%EC%8B%9C%EB%8F%84sido-%EB%8B%A8%EC%9C%84%EB%8A%94-%EB%AA%87-%EA%B0%9C%EC%9D%B8%EA%B0%80" id="toc-시도sido-단위는-몇-개인가" class="nav-link" data-scroll-target="#%EC%8B%9C%EB%8F%84sido-%EB%8B%A8%EC%9C%84%EB%8A%94-%EB%AA%87-%EA%B0%9C%EC%9D%B8%EA%B0%80">시도(sido) 단위는 몇 개인가?</a></li>
+  <li><a href="#%EC%9B%90%ED%95%98%EB%8A%94-%ED%96%89%EB%93%A4%EC%9D%84-%EA%B1%B8%EB%9F%ACfilter%EB%82%B4%EB%8A%94-%EB%B0%A9%EB%B2%95" id="toc-원하는-행들을-걸러filter내는-방법" class="nav-link" data-scroll-target="#%EC%9B%90%ED%95%98%EB%8A%94-%ED%96%89%EB%93%A4%EC%9D%84-%EA%B1%B8%EB%9F%ACfilter%EB%82%B4%EB%8A%94-%EB%B0%A9%EB%B2%95">원하는 행들을 걸러(filter)내는 방법</a></li>
+  <li><a href="#%EC%9B%90%ED%95%98%EB%8A%94-%ED%96%89%EB%93%A4%EC%9D%84-%EC%9E%98%EB%9D%BC%EB%82%B4%EB%8A%94-slice%EB%B0%A9%EB%B2%95" id="toc-원하는-행들을-잘라내는-slice방법" class="nav-link" data-scroll-target="#%EC%9B%90%ED%95%98%EB%8A%94-%ED%96%89%EB%93%A4%EC%9D%84-%EC%9E%98%EB%9D%BC%EB%82%B4%EB%8A%94-slice%EB%B0%A9%EB%B2%95">원하는 행들을 잘라내는 (slice)방법</a></li>
+  <li><a href="#%EB%82%B4%EB%A7%98%EB%8C%80%EB%A1%9C-%ED%96%89%EC%9D%84-%EC%A0%95%EB%A0%ACarrange-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95" id="toc-내맘대로-행을-정렬arrange-하는-방법" class="nav-link" data-scroll-target="#%EB%82%B4%EB%A7%98%EB%8C%80%EB%A1%9C-%ED%96%89%EC%9D%84-%EC%A0%95%EB%A0%ACarrange-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">내맘대로 행을 정렬(arrange) 하는 방법</a></li>
+  <li><a href="#%EC%9B%90%ED%95%98%EB%8A%94-%EC%97%B4%EC%9D%84-%EC%84%A0%ED%83%9Dselect%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95" id="toc-원하는-열을-선택select하는-방법" class="nav-link" data-scroll-target="#%EC%9B%90%ED%95%98%EB%8A%94-%EC%97%B4%EC%9D%84-%EC%84%A0%ED%83%9Dselect%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">원하는 열을 선택(select)하는 방법</a></li>
+  <li><a href="#%EB%82%98%EB%A7%8C%EC%9D%98-%EC%97%B4%EC%9D%84-%EC%83%9D%EC%84%B1mutate%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95" id="toc-나만의-열을-생성mutate하는-방법" class="nav-link" data-scroll-target="#%EB%82%98%EB%A7%8C%EC%9D%98-%EC%97%B4%EC%9D%84-%EC%83%9D%EC%84%B1mutate%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">나만의 열을 생성(mutate)하는 방법</a></li>
+  <li><a href="#%EC%97%B4-%EC%9D%B4%EB%A6%84-%EB%8B%A4%EC%8B%9C-%EC%A0%95%ED%95%98%EA%B8%B0rename" id="toc-열-이름-다시-정하기rename" class="nav-link" data-scroll-target="#%EC%97%B4-%EC%9D%B4%EB%A6%84-%EB%8B%A4%EC%8B%9C-%EC%A0%95%ED%95%98%EA%B8%B0rename">열 이름 다시 정하기(rename)</a></li>
+  <li><a href="#%EC%97%B4%EC%9D%98-%EC%9C%84%EC%B9%98%EB%A5%BC-%EC%9E%AC%EB%B0%B0%EC%B9%98relocate-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95" id="toc-열의-위치를-재배치relocate-하는-방법" class="nav-link" data-scroll-target="#%EC%97%B4%EC%9D%98-%EC%9C%84%EC%B9%98%EB%A5%BC-%EC%9E%AC%EB%B0%B0%EC%B9%98relocate-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">열의 위치를 재배치(relocate) 하는 방법</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content"><section id="tidyverse에-대하여" class="level3"><h3 class="anchored" data-anchor-id="tidyverse에-대하여">Tidyverse에 대하여</h3>
+<ul>
+<li><p>여러 데이터 분석에 유용한 패키지들의 모음집</p></li>
+<li>
+<p>공식적인 tidyverse의 시작은 2016년이다.</p>
+<ul>
+<li><p>이전부터 각각 구성원들이 따로 사용되고 있었다.</p></li>
+<li><p>ggplot2 패키지는 2005년에 만들어졌다.</p></li>
+</ul>
+</li>
+</ul></section><section id="핵심-구성-요소" class="level3"><h3 class="anchored" data-anchor-id="핵심-구성-요소">핵심 구성 요소</h3>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages('tidyverse')</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/paste-9FE3AD1F.png" class="img-fluid"></p>
+<ul>
+<li><p>ggplot2 : Data visualization</p></li>
+<li><p>dplyr : data wrangling</p></li>
+<li><p>readr : reading data</p></li>
+<li><p>tibble : modern data frames</p></li>
+<li><p>stringr : string manipulation</p></li>
+<li><p>forcats : dealing with factors</p></li>
+<li><p>tidyr : data tidying</p></li>
+<li><p>purrr : functional programming</p></li>
+</ul></section><section id="데이터-맛보기" class="level3"><h3 class="anchored" data-anchor-id="데이터-맛보기">데이터 맛보기</h3>
+<p>서울시 생활이동 데이터</p>
+<ul>
+<li><p>특정 시점에 서울 안에서 이동, 서울 외부에서 서울로 오고 간 이동<br>
+한 데이터</p></li>
+<li><p>통근, 통학, 쇼핑, 여가 등 서울시의 행정수요를 유발하는 모든 이동을 의미한다.</p></li>
+<li><p>2021 7월 (8시) 이동 데이터</p></li>
+<li><p>자치구 코드 정보</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">moving_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">'seoul_moving_202107_09_hr.csv'</span><span class="op">)</span></span>
+<span><span class="va">reference_data</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">'reference.xlsx'</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="데이터-파일-불러오기" class="level3"><h3 class="anchored" data-anchor-id="데이터-파일-불러오기">데이터 파일 불러오기</h3>
+<ul>
+<li><p><code>.csv</code> 파일의 경우 <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> 함수를 사용</p></li>
+<li>
+<p><code>.xlsx 파일의 경우 read_xlsx() 함수를 사용</code></p>
+<ul>
+<li><p>차이점은? –&gt; 파일 형태의 차이에 있다.</p></li>
+<li><p><code>::</code> 의 의미 –&gt; 로딩 없이 패키지 안에 있는 함수를 사용하고 싶을 때 활용한다.<br>
+Ex) readxl 이라는 패키지 안에 함수 read_excel ( )을 로딩없이 사용하고 싶다.<br>
+그럴 때, <code>readxl :: read_excel() 와 같이 사용하면 된다.</code></p></li>
+</ul>
+</li>
+</ul></section><section id="section" class="level3"><h3 class="anchored" data-anchor-id="section"></h3>
+</section><section id="데이터와-친해지기" class="level3"><h3 class="anchored" data-anchor-id="데이터와-친해지기">데이터와 친해지기</h3>
+<ol type="1">
+<li><strong>기초 탐색(R 내장함수)</strong></li>
+</ol>
+<ul>
+<li><p>dim( )</p></li>
+<li><p>head( )</p></li>
+<li><p>tail( )</p></li>
+</ul>
+<ol start="2" type="1">
+<li><strong>tidyverse</strong></li>
+</ol>
+<ul>
+<li>glimpse( )</li>
+</ul></section><section id="데이터-변수-이름-바꾸기" class="level3"><h3 class="anchored" data-anchor-id="데이터-변수-이름-바꾸기">데이터 변수 이름 바꾸기</h3>
+<p>변수 이름 설정 - 한글 코딩은 싫어요!!</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># reference_data </span></span>
+<span><span class="va">origin_name_reference</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">reference_data</span><span class="op">)</span></span>
+<span><span class="va">origin_name_reference</span> <span class="co"># 한글로 된 변수이름</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "시도"      "시군구"    "name"      "full name"</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 한글 변수들을 영어 변수로 바꿔준다. </span></span>
+<span><span class="co"># janitor 패키지의 clean_names() 함수를 사용! </span></span>
+<span><span class="va">reference_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sido"      "sigungu"   "name"      "full_name"</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># moving_data</span></span>
+<span><span class="va">origin_name_moving</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">moving_data</span><span class="op">)</span></span>
+<span><span class="va">origin_name_moving</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "대상연월"           "요일"               "도착시간"          
+ [4] "출발 시군구 코드"   "도착 시군구 코드"   "성별"              
+ [7] "나이"               "이동유형"           "평균 이동 시간(분)"
+[10] "이동인구(합)"      </code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "daesang_yeon_wol"            "yoil"                       
+ [3] "dochagsigan"                 "chulbal_sigungu_kodeu"      
+ [5] "dochag_sigungu_kodeu"        "seongbyeol"                 
+ [7] "nai"                         "idong_yuhyeong"             
+ [9] "pyeong_gyun_idong_sigan_bun" "idong_ingu_hab"             </code></pre>
+</div>
+</div>
+</section><section id="dplyr-패키지기본-동사-학습" class="level3"><h3 class="anchored" data-anchor-id="dplyr-패키지기본-동사-학습">
+<code>dplyr</code> 패키지(기본 동사 학습)</h3>
+<ul>
+<li>Single table 동사들</li>
+</ul>
+<ol type="1">
+<li>
+<p>행(row) 관련 동사들</p>
+<ul>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice( )</a></code></p></li>
+</ul>
+</li>
+<li>
+<p>열(column) 관련 동사들</p>
+<ul>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/select.html">select( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate( )</a></code></p></li>
+</ul>
+</li>
+</ol></section><section id="시도sido-단위는-몇-개인가" class="level3"><h3 class="anchored" data-anchor-id="시도sido-단위는-몇-개인가">시도(sido) 단위는 몇 개인가?</h3>
+<p>중복 없는 표본들을 걸러준다.</p>
+<ul>
+<li>
+<p><code><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct( )</a></code></p>
+<ul>
+<li>
+<code>.keep_all( ) = TRUE</code> 설정으로 딸려있는 데이터 보관하기</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">reference_data</span> <span class="op">&lt;-</span> <span class="va">reference_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                      <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># sido 변수안에 있는 data값들을 분리해서 보여준다.</span></span>
+<span><span class="va">reference_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">sido</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 1
+    sido
+   &lt;dbl&gt;
+ 1 11000
+ 2 21000
+ 3 22000
+ 4 23000
+ 5 24000
+ 6 25000
+ 7 26000
+ 8 29000
+ 9 31000
+10 32000
+11 33000
+12 34000
+13 35000
+14 36000
+15 37000
+16 38000
+17 39000</code></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 분리한 값들을 count</span></span>
+<span><span class="va">reference_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">sido</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1    17</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># '.keep_all = TRUE'의 설정으로 딸려있는 데이터도 같이 보여준다</span></span>
+<span><span class="va">reference_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">sido</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17  4</code></pre>
+</div>
+</div>
+</section><section id="원하는-행들을-걸러filter내는-방법" class="level3"><h3 class="anchored" data-anchor-id="원하는-행들을-걸러filter내는-방법">원하는 행들을 걸러(filter)내는 방법</h3>
+<p><strong>사용 가능한 함수들</strong></p>
+<ul>
+<li>
+<p>연산자들</p>
+<ul>
+<li><code>==, &gt; , &gt;=, &amp;, |, !</code></li>
+</ul>
+</li>
+<li>
+<p><code>유용한</code> 함수들</p>
+<ul>
+<li><p><code><a href="https://rdrr.io/r/base/NA.html">is.na( )</a></code></p></li>
+<li><p><code>between( ), near( )</code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,263,554
+Columns: 10
+$ 대상연월             &lt;dbl&gt; 202107, 202107, 202107, 202107, 202107, 202107, 2…
+$ 요일                 &lt;chr&gt; "일", "일", "일", "일", "일", "일", "일", "일", "…
+$ 도착시간             &lt;chr&gt; "09", "09", "09", "09", "09", "09", "09", "09", "…
+$ `출발 시군구 코드`   &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, 11010, …
+$ `도착 시군구 코드`   &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, 11010, …
+$ 성별                 &lt;chr&gt; "F", "F", "F", "F", "F", "F", "F", "F", "F", "F",…
+$ 나이                 &lt;chr&gt; "00", "10", "10", "10", "10", "15", "15", "15", "…
+$ 이동유형             &lt;chr&gt; "HE", "HW", "HE", "EE", "HH", "EH", "WH", "EE", "…
+$ `평균 이동 시간(분)` &lt;dbl&gt; 10, 10, 10, 20, 20, 10, 10, 10, 10, 10, 30, 60, 1…
+$ `이동인구(합)`       &lt;chr&gt; "55.41", "5.9", "41.5", "11.98", "5.93", "6.05", …</code></pre>
+</div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 일요일에 운전을 한 여자</span></span>
+<span><span class="va">moving_data</span> <span class="op">&lt;-</span> <span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">yoil</span> <span class="op">==</span> <span class="st">'일'</span>,</span>
+<span>         <span class="va">seongbyeol</span> <span class="op">==</span> <span class="st">'F'</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># 출발코드가 11010 이면서 도착코드가 11010인 data</span></span>
+<span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">chulbal_sigungu_kodeu</span> <span class="op">==</span> <span class="fl">11010</span>,</span>
+<span>         <span class="va">dochag_sigungu_kodeu</span> <span class="op">==</span> <span class="fl">11010</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 117 × 10
+   daesang…¹ yoil  docha…² chulb…³ docha…⁴ seong…⁵ nai   idong…⁶ pyeon…⁷ idong…⁸
+       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  
+ 1    202107 일    09        11010   11010 F       00    HE           10 55.41  
+ 2    202107 일    09        11010   11010 F       10    HW           10 5.9    
+ 3    202107 일    09        11010   11010 F       10    HE           10 41.5   
+ 4    202107 일    09        11010   11010 F       10    EE           20 11.98  
+ 5    202107 일    09        11010   11010 F       10    HH           20 5.93   
+ 6    202107 일    09        11010   11010 F       15    EH           10 6.05   
+ 7    202107 일    09        11010   11010 F       15    WH           10 4.04   
+ 8    202107 일    09        11010   11010 F       15    EE           10 20.39  
+ 9    202107 일    09        11010   11010 F       15    HE           10 76.78  
+10    202107 일    09        11010   11010 F       15    HW           10 48.43  
+# … with 107 more rows, and abbreviated variable names ¹​daesang_yeon_wol,
+#   ²​dochagsigan, ³​chulbal_sigungu_kodeu, ⁴​dochag_sigungu_kodeu, ⁵​seongbyeol,
+#   ⁶​idong_yuhyeong, ⁷​pyeong_gyun_idong_sigan_bun, ⁸​idong_ingu_hab</code></pre>
+</div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 나이가 20~40대인 data</span></span>
+<span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span><span class="op">(</span><span class="va">nai</span>, <span class="fl">20</span>,<span class="fl">40</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 25,761 × 10
+   daesang…¹ yoil  docha…² chulb…³ docha…⁴ seong…⁵ nai   idong…⁶ pyeon…⁷ idong…⁸
+       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  
+ 1    202107 일    09        11010   11010 F       20    WH           30 10.83  
+ 2    202107 일    09        11010   11010 F       20    EH           60 8.68   
+ 3    202107 일    09        11010   11010 F       20    EW           10 *      
+ 4    202107 일    09        11010   11010 F       20    WW           70 *      
+ 5    202107 일    09        11010   11010 F       20    WE           50 *      
+ 6    202107 일    09        11010   11010 F       20    HE           10 100.14 
+ 7    202107 일    09        11010   11010 F       20    HH           10 8.67   
+ 8    202107 일    09        11010   11010 F       20    HW           10 143.46 
+ 9    202107 일    09        11010   11010 F       20    EE           10 43.69  
+10    202107 일    09        11010   11010 F       25    HH           20 16.16  
+# … with 25,751 more rows, and abbreviated variable names ¹​daesang_yeon_wol,
+#   ²​dochagsigan, ³​chulbal_sigungu_kodeu, ⁴​dochag_sigungu_kodeu, ⁵​seongbyeol,
+#   ⁶​idong_yuhyeong, ⁷​pyeong_gyun_idong_sigan_bun, ⁸​idong_ingu_hab</code></pre>
+</div>
+</div>
+</section><section id="원하는-행들을-잘라내는-slice방법" class="level3"><h3 class="anchored" data-anchor-id="원하는-행들을-잘라내는-slice방법">원하는 행들을 잘라내는 (slice)방법</h3>
+<p>기본 함수인 <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> 의 확장버전</p>
+<ul>
+<li>
+<p>기본적으로 인덱싱을 제공</p>
+<ul>
+<li>맨 마지막 인덱스: <code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code>
+</li>
+</ul>
+</li>
+<li>
+<p>유용한 함수들</p>
+<ul>
+<li><code>slice_max( ),slice_min( ),slice_sample(),slice_head(),slice_tail()</code></li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 15~20번째 행들 추출</span></span>
+<span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">15</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  daesang_…¹ yoil  docha…² chulb…³ docha…⁴ seong…⁵ nai   idong…⁶ pyeon…⁷ idong…⁸
+       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  
+1     202107 일    09        11010   11010 F       20    WE           50 *      
+2     202107 일    09        11010   11010 F       20    HE           10 100.14 
+3     202107 일    09        11010   11010 F       20    HH           10 8.67   
+4     202107 일    09        11010   11010 F       20    HW           10 143.46 
+5     202107 일    09        11010   11010 F       20    EE           10 43.69  
+6     202107 일    09        11010   11010 F       25    HH           20 16.16  
+# … with abbreviated variable names ¹​daesang_yeon_wol, ²​dochagsigan,
+#   ³​chulbal_sigungu_kodeu, ⁴​dochag_sigungu_kodeu, ⁵​seongbyeol,
+#   ⁶​idong_yuhyeong, ⁷​pyeong_gyun_idong_sigan_bun, ⁸​idong_ingu_hab</code></pre>
+</div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 마지막 6개의 행들 추출 </span></span>
+<span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_tail</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  daesang_…¹ yoil  docha…² chulb…³ docha…⁴ seong…⁵ nai   idong…⁶ pyeon…⁷ idong…⁸
+       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  
+1     202107 일    09        39000   11240 F       40    EW           50 3.44   
+2     202107 일    09        39000   11240 F       40    EE           60 3.42   
+3     202107 일    09        39000   11240 F       40    EH           60 3.43   
+4     202107 일    09        39000   11240 F       45    EH           80 3.3    
+5     202107 일    09        39000   11240 F       50    EH           30 3.12   
+6     202107 일    09        39000   11240 F       55    EE           80 3.27   
+# … with abbreviated variable names ¹​daesang_yeon_wol, ²​dochagsigan,
+#   ³​chulbal_sigungu_kodeu, ⁴​dochag_sigungu_kodeu, ⁵​seongbyeol,
+#   ⁶​idong_yuhyeong, ⁷​pyeong_gyun_idong_sigan_bun, ⁸​idong_ingu_hab</code></pre>
+</div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># nai 변수가 숫자형이 아닌 문자형 데이터이므로, 데이터 변환 후</span></span>
+<span><span class="co"># nai 변수만 따로 가져와서, 나이 TOP 5 추출하기 </span></span>
+<span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>nai <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">nai</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">nai</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="va">nai</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+    nai
+  &lt;dbl&gt;
+1    80
+2    75
+3    70
+4    65
+5    60</code></pre>
+</div>
+</div>
+</section><section id="내맘대로-행을-정렬arrange-하는-방법" class="level3"><h3 class="anchored" data-anchor-id="내맘대로-행을-정렬arrange-하는-방법">내맘대로 행을 정렬(arrange) 하는 방법</h3>
+<ul>
+<li><p>정렬 기준 우선 순위 순서대로 설정</p></li>
+<li><p>내림차순 : <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">dochagsigan</span>,</span>
+<span>         <span class="va">pyeong_gyun_idong_sigan_bun</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">dochagsigan</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">pyeong_gyun_idong_sigan_bun</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 2
+   dochagsigan pyeong_gyun_idong_sigan_bun
+   &lt;chr&gt;                             &lt;dbl&gt;
+ 1 09                                  600
+ 2 09                                  580
+ 3 09                                  550
+ 4 09                                  490
+ 5 09                                  470
+ 6 09                                  470
+ 7 09                                  470
+ 8 09                                  460
+ 9 09                                  460
+10 09                                  450
+# … with 62,066 more rows</code></pre>
+</div>
+</div>
+</section><section id="원하는-열을-선택select하는-방법" class="level3"><h3 class="anchored" data-anchor-id="원하는-열을-선택select하는-방법">원하는 열을 선택(select)하는 방법</h3>
+<p><strong>사용할 수 있는 옵션들</strong></p>
+<ul>
+<li>
+<p>사용가능 연산자들</p>
+<ul>
+<li>
+<code>: , ! , &amp; , | , c( )</code> 사용</li>
+</ul>
+</li>
+<li>
+<p>편리한 함수들</p>
+<ul>
+<li><p><code>everything( ), last_col( )</code></p></li>
+<li><p><code>starts_with( ),ends_with( ),contains( )</code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># sido 변수를 1열에 배치해주고, 나머지는 순차적으로! </span></span>
+<span><span class="va">reference_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">sido</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 4
+    sido sigungu name     full_name          
+   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;              
+ 1 11000   11010 종로구   서울특별시 종로구  
+ 2 11000   11020 중구     서울특별시 중구    
+ 3 11000   11030 용산구   서울특별시 용산구  
+ 4 11000   11040 성동구   서울특별시 성동구  
+ 5 11000   11050 광진구   서울특별시 광진구  
+ 6 11000   11060 동대문구 서울특별시 동대문구
+ 7 11000   11070 중랑구   서울특별시 중랑구  
+ 8 11000   11080 성북구   서울특별시 성북구  
+ 9 11000   11090 강북구   서울특별시 강북구  
+10 11000   11100 도봉구   서울특별시 도봉구  
+# … with 81 more rows</code></pre>
+</div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># name 변수와 last col인 full_name 변수를 가져와줘!</span></span>
+<span><span class="va">reference_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 2
+   name     full_name          
+   &lt;chr&gt;    &lt;chr&gt;              
+ 1 종로구   서울특별시 종로구  
+ 2 중구     서울특별시 중구    
+ 3 용산구   서울특별시 용산구  
+ 4 성동구   서울특별시 성동구  
+ 5 광진구   서울특별시 광진구  
+ 6 동대문구 서울특별시 동대문구
+ 7 중랑구   서울특별시 중랑구  
+ 8 성북구   서울특별시 성북구  
+ 9 강북구   서울특별시 강북구  
+10 도봉구   서울특별시 도봉구  
+# … with 81 more rows</code></pre>
+</div>
+</div>
+</section><section id="나만의-열을-생성mutate하는-방법" class="level3"><h3 class="anchored" data-anchor-id="나만의-열을-생성mutate하는-방법">나만의 열을 생성(mutate)하는 방법</h3>
+<ul>
+<li><strong>new = old 문법</strong></li>
+</ul>
+<p><code>mutate(new = old_1 + old_2 …. + old_n)</code></p>
+<ul>
+<li>유용한 옵션</li>
+</ul>
+<p><code>.keep = c('all', 'used', 'unused', 'none' )</code></p>
+<ul>
+<li>
+<p>궁합 좋은 함수들(심화공부<code>)</code></p>
+<ul>
+<li><code>case_when() , na_if(), coalesce(), if_else()</code></li>
+</ul>
+</li>
+<li><p>년도 정도만 뺴내오기</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org">stringr</a></span><span class="op">)</span></span>
+<span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 62,076
+Columns: 10
+$ daesang_yeon_wol            &lt;dbl&gt; 202107, 202107, 202107, 202107, 202107, 20…
+$ yoil                        &lt;chr&gt; "일", "일", "일", "일", "일", "일", "일", …
+$ dochagsigan                 &lt;chr&gt; "09", "09", "09", "09", "09", "09", "09", …
+$ chulbal_sigungu_kodeu       &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, …
+$ dochag_sigungu_kodeu        &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, …
+$ seongbyeol                  &lt;chr&gt; "F", "F", "F", "F", "F", "F", "F", "F", "F…
+$ nai                         &lt;chr&gt; "00", "10", "10", "10", "10", "15", "15", …
+$ idong_yuhyeong              &lt;chr&gt; "HE", "HW", "HE", "EE", "HH", "EH", "WH", …
+$ pyeong_gyun_idong_sigan_bun &lt;dbl&gt; 10, 10, 10, 20, 20, 10, 10, 10, 10, 10, 30…
+$ idong_ingu_hab              &lt;chr&gt; "55.41", "5.9", "41.5", "11.98", "5.93", "…</code></pre>
+</div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">moving_data</span> <span class="op">%&lt;&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op">(</span><span class="va">daesang_yeon_wol</span>, <span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>,</span>
+<span>         year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>분(min)을 시간(hr)으로 변환</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 62,076
+Columns: 11
+$ year                        &lt;int&gt; 2021, 2021, 2021, 2021, 2021, 2021, 2021, …
+$ daesang_yeon_wol            &lt;dbl&gt; 202107, 202107, 202107, 202107, 202107, 20…
+$ yoil                        &lt;chr&gt; "일", "일", "일", "일", "일", "일", "일", …
+$ dochagsigan                 &lt;chr&gt; "09", "09", "09", "09", "09", "09", "09", …
+$ chulbal_sigungu_kodeu       &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, …
+$ dochag_sigungu_kodeu        &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, …
+$ seongbyeol                  &lt;chr&gt; "F", "F", "F", "F", "F", "F", "F", "F", "F…
+$ nai                         &lt;chr&gt; "00", "10", "10", "10", "10", "15", "15", …
+$ idong_yuhyeong              &lt;chr&gt; "HE", "HW", "HE", "EE", "HH", "EH", "WH", …
+$ pyeong_gyun_idong_sigan_bun &lt;dbl&gt; 10, 10, 10, 20, 20, 10, 10, 10, 10, 10, 30…
+$ idong_ingu_hab              &lt;chr&gt; "55.41", "5.9", "41.5", "11.98", "5.93", "…</code></pre>
+</div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>idong_sigan_hr <span class="op">=</span> <span class="va">pyeong_gyun_idong_sigan_bun</span> <span class="op">/</span> <span class="fl">60</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">idong_sigan_hr</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 12
+   idong_sig…¹  year daesa…² yoil  docha…³ chulb…⁴ docha…⁵ seong…⁶ nai   idong…⁷
+         &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+ 1       0.167  2021  202107 일    09        11010   11010 F       00    HE     
+ 2       0.167  2021  202107 일    09        11010   11010 F       10    HW     
+ 3       0.167  2021  202107 일    09        11010   11010 F       10    HE     
+ 4       0.333  2021  202107 일    09        11010   11010 F       10    EE     
+ 5       0.333  2021  202107 일    09        11010   11010 F       10    HH     
+ 6       0.167  2021  202107 일    09        11010   11010 F       15    EH     
+ 7       0.167  2021  202107 일    09        11010   11010 F       15    WH     
+ 8       0.167  2021  202107 일    09        11010   11010 F       15    EE     
+ 9       0.167  2021  202107 일    09        11010   11010 F       15    HE     
+10       0.167  2021  202107 일    09        11010   11010 F       15    HW     
+# … with 62,066 more rows, 2 more variables: pyeong_gyun_idong_sigan_bun &lt;dbl&gt;,
+#   idong_ingu_hab &lt;chr&gt;, and abbreviated variable names ¹​idong_sigan_hr,
+#   ²​daesang_yeon_wol, ³​dochagsigan, ⁴​chulbal_sigungu_kodeu,
+#   ⁵​dochag_sigungu_kodeu, ⁶​seongbyeol, ⁷​idong_yuhyeong</code></pre>
+</div>
+</div>
+<ul>
+<li>시도 정보만 빼내오기(ex. 서울특별시, 부산광역시…)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">reference_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 91
+Columns: 4
+$ sido      &lt;dbl&gt; 11000, 11000, 11000, 11000, 11000, 11000, 11000, 11000, 1100…
+$ sigungu   &lt;dbl&gt; 11010, 11020, 11030, 11040, 11050, 11060, 11070, 11080, 1109…
+$ name      &lt;chr&gt; "종로구", "중구", "용산구", "성동구", "광진구", "동대문구", …
+$ full_name &lt;chr&gt; "서울특별시 종로구", "서울특별시 중구", "서울특별시 용산구",…</code></pre>
+</div>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">reference_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sido_name <span class="op">=</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split_fixed</a></span><span class="op">(</span><span class="va">full_name</span>,</span>
+<span>                                    pattern <span class="op">=</span> <span class="st">" "</span>,<span class="fl">2</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">sido_name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 1
+   sido_name     
+   &lt;chr&gt;         
+ 1 서울특별시    
+ 2 부산광역시    
+ 3 대구광역시    
+ 4 인천광역시    
+ 5 광주광역시    
+ 6 대전광역시    
+ 7 울산광역시    
+ 8 세종특별자치시
+ 9 경기도        
+10 강원도        
+11 충청북도      
+12 충청남도      
+13 전라북도      
+14 전라남도      
+15 경상북도      
+16 경상남도      
+17 제주특별자치도</code></pre>
+</div>
+</div>
+</section><section id="열-이름-다시-정하기rename" class="level3"><h3 class="anchored" data-anchor-id="열-이름-다시-정하기rename">열 이름 다시 정하기(rename)</h3>
+<p><code>df %&gt;% rename(new = old)</code></p>
+<p><code>df %&gt;% rename_with(function)</code></p>
+<ul>
+<li>A을 a_new로 바꾸기</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># df %&gt;% rename(a_new = A) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>모든 열이름 대문자로 바꾸기</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># df %&gt;% rename_with(toupper)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>실습하기</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>avg_time_min<span class="op">=</span> <span class="va">pyeong_gyun_idong_sigan_bun</span>,</span>
+<span>         ppl_sum <span class="op">=</span> <span class="va">idong_ingu_hab</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">avg_time_min</span>, <span class="va">ppl_sum</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 2
+   avg_time_min ppl_sum
+          &lt;dbl&gt; &lt;chr&gt;  
+ 1           10 55.41  
+ 2           10 5.9    
+ 3           10 41.5   
+ 4           20 11.98  
+ 5           20 5.93   
+ 6           10 6.05   
+ 7           10 4.04   
+ 8           10 20.39  
+ 9           10 76.78  
+10           10 48.43  
+# … with 62,066 more rows</code></pre>
+</div>
+</div>
+</section><section id="열의-위치를-재배치relocate-하는-방법" class="level3"><h3 class="anchored" data-anchor-id="열의-위치를-재배치relocate-하는-방법">열의 위치를 재배치(relocate) 하는 방법</h3>
+<ul>
+<li>열의 위치를 앞으로 땅김</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># df %&gt;% relocate(col)</span></span>
+<span><span class="co"># df %&gt;% select(col, everything())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>
+<p>특정 위치로 옮길떄</p>
+<ul>
+<li><p><code>.before , .after</code> 옵션</p></li>
+<li><p><code><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col()</a></code>함수</p></li>
+</ul>
+</li>
+<li>
+<p>변수 타입으로 정렬가능</p>
+<ul>
+<li>
+<code>where(is.character)</code> 사용</li>
+</ul>
+</li>
+<li><p>실습하기</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 이동 인구 합 앞으로</span></span>
+<span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">idong_ingu_hab</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 11
+   idong_ing…¹  year daesa…² yoil  docha…³ chulb…⁴ docha…⁵ seong…⁶ nai   idong…⁷
+   &lt;chr&gt;       &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+ 1 55.41        2021  202107 일    09        11010   11010 F       00    HE     
+ 2 5.9          2021  202107 일    09        11010   11010 F       10    HW     
+ 3 41.5         2021  202107 일    09        11010   11010 F       10    HE     
+ 4 11.98        2021  202107 일    09        11010   11010 F       10    EE     
+ 5 5.93         2021  202107 일    09        11010   11010 F       10    HH     
+ 6 6.05         2021  202107 일    09        11010   11010 F       15    EH     
+ 7 4.04         2021  202107 일    09        11010   11010 F       15    WH     
+ 8 20.39        2021  202107 일    09        11010   11010 F       15    EE     
+ 9 76.78        2021  202107 일    09        11010   11010 F       15    HE     
+10 48.43        2021  202107 일    09        11010   11010 F       15    HW     
+# … with 62,066 more rows, 1 more variable: pyeong_gyun_idong_sigan_bun &lt;dbl&gt;,
+#   and abbreviated variable names ¹​idong_ingu_hab, ²​daesang_yeon_wol,
+#   ³​dochagsigan, ⁴​chulbal_sigungu_kodeu, ⁵​dochag_sigungu_kodeu, ⁶​seongbyeol,
+#   ⁷​idong_yuhyeong</code></pre>
+</div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 문자열 타입 앞으로</span></span>
+<span><span class="va">moving_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 11
+   yoil  dochagsigan seong…¹ nai   idong…² idong…³  year daesa…⁴ chulb…⁵ docha…⁶
+   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 일    09          F       00    HE      55.41    2021  202107   11010   11010
+ 2 일    09          F       10    HW      5.9      2021  202107   11010   11010
+ 3 일    09          F       10    HE      41.5     2021  202107   11010   11010
+ 4 일    09          F       10    EE      11.98    2021  202107   11010   11010
+ 5 일    09          F       10    HH      5.93     2021  202107   11010   11010
+ 6 일    09          F       15    EH      6.05     2021  202107   11010   11010
+ 7 일    09          F       15    WH      4.04     2021  202107   11010   11010
+ 8 일    09          F       15    EE      20.39    2021  202107   11010   11010
+ 9 일    09          F       15    HE      76.78    2021  202107   11010   11010
+10 일    09          F       15    HW      48.43    2021  202107   11010   11010
+# … with 62,066 more rows, 1 more variable: pyeong_gyun_idong_sigan_bun &lt;dbl&gt;,
+#   and abbreviated variable names ¹​seongbyeol, ²​idong_yuhyeong,
+#   ³​idong_ingu_hab, ⁴​daesang_yeon_wol, ⁵​chulbal_sigungu_kodeu,
+#   ⁶​dochag_sigungu_kodeu</code></pre>
+</div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><script src="https://giscus.app/client.js" data-repo="DataChuLee/-my-Quartowebsite" data-repo-id="R_kgDOIsfm7Q" data-category="Comments" data-category-id="DIC_kwDOIsfm7c4CTWT5" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="ko" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

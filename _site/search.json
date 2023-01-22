@@ -33,5 +33,12 @@
     "title": "R study",
     "section": "",
     "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nDescription\n\n\n\n\n\n\n2023/01/16\n\n\nLecture 16\n\n\n함수만들기 function()\n\n\n\n\n2023/01/16\n\n\nLecture 17\n\n\n연산자 만들기, return 함수\n\n\n\n\n2023/01/16\n\n\nLecture 18\n\n\nProject(프로젝트) 생성 및 관리 방법 상세 안내\n\n\n\n\n2023/01/15\n\n\nLecture 13\n\n\n데이터 변환과 편집\n\n\n\n\n2023/01/15\n\n\nLecture 14\n\n\nif문, elseif문\n\n\n\n\n2023/01/15\n\n\nLecture 15\n\n\nfor 문, while 문\n\n\n\n\n2023/01/12\n\n\nLecture 12\n\n\n데이터 프레임(Data Frame)\n\n\n\n\n2023/01/11\n\n\nLecture 11\n\n\nlist : 생성, index, sublist, pre-allocate\n\n\n\n\n2023/01/10\n\n\nLecture 10\n\n\narray : dim(), array(), index\n\n\n\n\n2023/01/09\n\n\nLecture 9\n\n\nmatrix(2)\n\n\n\n\n2023/01/08\n\n\nLecture 8\n\n\nmatrix(1)\n\n\n\n\n2023/01/07\n\n\nLecture 7\n\n\nfactor함수와 levels, order 옵션\n\n\n\n\n2023/01/06\n\n\nLecture 6\n\n\nvector(2):index,pre-allocate,벡터끼리 계산, 정규분포 만들기\n\n\n\n\n2023/01/05\n\n\nLecture 5\n\n\nvector(1):숫자형, 문자형 벡터 생성 및 seq()함수, rep()함수\n\n\n\n\n2023/01/04\n\n\nLecture 4\n\n\n자료형/자료구조 변환\n\n\n\n\n2023/01/03\n\n\nLecture 3\n\n\n행렬, 배열, 리스트, 데이터 프레임\n\n\n\n\n2023/01/02\n\n\nLecture 2\n\n\n범주형 변수(명목형, 순서형), 연속형 변수\n\n\n\n\n2023/01/01\n\n\nLecture 1\n\n\nData 구조\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "Rtidyverse.html",
+    "href": "Rtidyverse.html",
+    "title": "R tidyverse",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n     \n  \n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nDescription\n\n\nCategories\n\n\n\n\n\n\n2023/01/20\n\n\nR tidyverse lec1\n\n\ntidyverse intro & 맛보기\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

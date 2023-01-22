@@ -8,6 +8,9 @@
     ],
     "Rstudy.qmd": [
       "Rstudy/**/*.qmd"
+    ],
+    "Rtidyverse.qmd": [
+      "R tidyverse/**/*.qmd"
     ]
   }
 }

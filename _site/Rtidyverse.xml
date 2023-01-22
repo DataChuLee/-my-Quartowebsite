@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>분석하는 O2</title>
+<link>https://rmathematics-qmd.netlify.app/Rtidyverse.html</link>
+<atom:link href="https://rmathematics-qmd.netlify.app/Rtidyverse.xml" rel="self" type="application/rss+xml"/>
+<description>O2 Qmd 블로그</description>
+<generator>quarto-1.0.36</generator>
+<lastBuildDate>Thu, 19 Jan 2023 15:00:00 GMT</lastBuildDate>
+<item>
+  <title>R tidyverse lec1</title>
+  <dc:creator>O2</dc:creator>
+  <link>https://rmathematics-qmd.netlify.app/R tidyverse/tidyverse lec1/lec1.html</link>
+  <description><![CDATA[ <section id="tidyverse에-대하여" class="level3"><h3 class="anchored" data-anchor-id="tidyverse에-대하여">Tidyverse에 대하여</h3>
+<ul>
+<li><p>여러 데이터 분석에 유용한 패키지들의 모음집</p></li>
+<li>
+<p>공식적인 tidyverse의 시작은 2016년이다.</p>
+<ul>
+<li><p>이전부터 각각 구성원들이 따로 사용되고 있었다.</p></li>
+<li><p>ggplot2 패키지는 2005년에 만들어졌다.</p></li>
+</ul>
+</li>
+</ul></section><section id="핵심-구성-요소" class="level3"><h3 class="anchored" data-anchor-id="핵심-구성-요소">핵심 구성 요소</h3>
+<div class="cell">
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># install.packages('tidyverse')</span></span>
+<span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+</div>
+<p><img src="https://rmathematics-qmd.netlify.app/R tidyverse/tidyverse lec1/images/paste-9FE3AD1F.png" class="img-fluid"></p>
+<ul>
+<li><p>ggplot2 : Data visualization</p></li>
+<li><p>dplyr : data wrangling</p></li>
+<li><p>readr : reading data</p></li>
+<li><p>tibble : modern data frames</p></li>
+<li><p>stringr : string manipulation</p></li>
+<li><p>forcats : dealing with factors</p></li>
+<li><p>tidyr : data tidying</p></li>
+<li><p>purrr : functional programming</p></li>
+</ul></section><section id="데이터-맛보기" class="level3"><h3 class="anchored" data-anchor-id="데이터-맛보기">데이터 맛보기</h3>
+<p>서울시 생활이동 데이터</p>
+<ul>
+<li><p>특정 시점에 서울 안에서 이동, 서울 외부에서 서울로 오고 간 이동<br>
+한 데이터</p></li>
+<li><p>통근, 통학, 쇼핑, 여가 등 서울시의 행정수요를 유발하는 모든 이동을 의미한다.</p></li>
+<li><p>2021 7월 (8시) 이동 데이터</p></li>
+<li><p>자치구 코드 정보</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">'seoul_moving_202107_09_hr.csv'</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;">readxl</span><span class="fu" style="color: #4758AB;">::</span> <span class="fu" style="color: #4758AB;"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">'reference.xlsx'</span><span class="op" style="color: #5E5E5E;">)</span> </span></code></pre></div>
+</div>
+</section><section id="데이터-파일-불러오기" class="level3"><h3 class="anchored" data-anchor-id="데이터-파일-불러오기">데이터 파일 불러오기</h3>
+<ul>
+<li><p><code>.csv</code> 파일의 경우 <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> 함수를 사용</p></li>
+<li>
+<p><code>.xlsx 파일의 경우 read_xlsx() 함수를 사용</code></p>
+<ul>
+<li><p>차이점은? –&gt; 파일 형태의 차이에 있다.</p></li>
+<li><p><code>::</code> 의 의미 –&gt; 로딩 없이 패키지 안에 있는 함수를 사용하고 싶을 때 활용한다.<br>
+Ex) readxl 이라는 패키지 안에 함수 read_excel ( )을 로딩없이 사용하고 싶다.<br>
+그럴 때, <code>readxl :: read_excel() 와 같이 사용하면 된다.</code></p></li>
+</ul>
+</li>
+</ul></section><section id="section" class="level3"><h3 class="anchored" data-anchor-id="section"></h3>
+</section><section id="데이터와-친해지기" class="level3"><h3 class="anchored" data-anchor-id="데이터와-친해지기">데이터와 친해지기</h3>
+<ol type="1">
+<li><strong>기초 탐색(R 내장함수)</strong></li>
+</ol>
+<ul>
+<li><p>dim( )</p></li>
+<li><p>head( )</p></li>
+<li><p>tail( )</p></li>
+</ul>
+<ol start="2" type="1">
+<li><strong>tidyverse</strong></li>
+</ol>
+<ul>
+<li>glimpse( )</li>
+</ul></section><section id="데이터-변수-이름-바꾸기" class="level3"><h3 class="anchored" data-anchor-id="데이터-변수-이름-바꾸기">데이터 변수 이름 바꾸기</h3>
+<p>변수 이름 설정 - 한글 코딩은 싫어요!!</p>
+<div class="cell">
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># reference_data </span></span>
+<span><span class="va" style="color: #111111;">origin_name_reference</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">reference_data</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">origin_name_reference</span> <span class="co" style="color: #5E5E5E;"># 한글로 된 변수이름</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "시도"      "시군구"    "name"      "full name"</code></pre>
+</div>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 한글 변수들을 영어 변수로 바꿔준다. </span></span>
+<span><span class="co" style="color: #5E5E5E;"># janitor 패키지의 clean_names() 함수를 사용! </span></span>
+<span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;">janitor</span><span class="fu" style="color: #4758AB;">::</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sido"      "sigungu"   "name"      "full_name"</code></pre>
+</div>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># moving_data</span></span>
+<span><span class="va" style="color: #111111;">origin_name_moving</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">moving_data</span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">origin_name_moving</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "대상연월"           "요일"               "도착시간"          
+ [4] "출발 시군구 코드"   "도착 시군구 코드"   "성별"              
+ [7] "나이"               "이동유형"           "평균 이동 시간(분)"
+[10] "이동인구(합)"      </code></pre>
+</div>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;">janitor</span><span class="fu" style="color: #4758AB;">::</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "daesang_yeon_wol"            "yoil"                       
+ [3] "dochagsigan"                 "chulbal_sigungu_kodeu"      
+ [5] "dochag_sigungu_kodeu"        "seongbyeol"                 
+ [7] "nai"                         "idong_yuhyeong"             
+ [9] "pyeong_gyun_idong_sigan_bun" "idong_ingu_hab"             </code></pre>
+</div>
+</div>
+</section><section id="dplyr-패키지기본-동사-학습" class="level3"><h3 class="anchored" data-anchor-id="dplyr-패키지기본-동사-학습">
+<code>dplyr</code> 패키지(기본 동사 학습)</h3>
+<ul>
+<li>Single table 동사들</li>
+</ul>
+<ol type="1">
+<li>
+<p>행(row) 관련 동사들</p>
+<ul>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice( )</a></code></p></li>
+</ul>
+</li>
+<li>
+<p>열(column) 관련 동사들</p>
+<ul>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/select.html">select( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate( )</a></code></p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate( )</a></code></p></li>
+</ul>
+</li>
+</ol></section><section id="시도sido-단위는-몇-개인가" class="level3"><h3 class="anchored" data-anchor-id="시도sido-단위는-몇-개인가">시도(sido) 단위는 몇 개인가?</h3>
+<p>중복 없는 표본들을 걸러준다.</p>
+<ul>
+<li>
+<p><code><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct( )</a></code></p>
+<ul>
+<li>
+<code>.keep_all( ) = TRUE</code> 설정으로 딸려있는 데이터 보관하기</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                      <span class="fu" style="color: #4758AB;">janitor</span><span class="fu" style="color: #4758AB;">::</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> </span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># sido 변수안에 있는 data값들을 분리해서 보여준다.</span></span>
+<span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">sido</span><span class="op" style="color: #5E5E5E;">)</span> </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 1
+    sido
+   &lt;dbl&gt;
+ 1 11000
+ 2 21000
+ 3 22000
+ 4 23000
+ 5 24000
+ 6 25000
+ 7 26000
+ 8 29000
+ 9 31000
+10 32000
+11 33000
+12 34000
+13 35000
+14 36000
+15 37000
+16 38000
+17 39000</code></pre>
+</div>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 분리한 값들을 count</span></span>
+<span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">sido</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1    17</code></pre>
+</div>
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># '.keep_all = TRUE'의 설정으로 딸려있는 데이터도 같이 보여준다</span></span>
+<span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">sido</span>, .keep_all <span class="op" style="color: #5E5E5E;">=</span> <span class="cn" style="color: #8f5902;">TRUE</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17  4</code></pre>
+</div>
+</div>
+</section><section id="원하는-행들을-걸러filter내는-방법" class="level3"><h3 class="anchored" data-anchor-id="원하는-행들을-걸러filter내는-방법">원하는 행들을 걸러(filter)내는 방법</h3>
+<p><strong>사용 가능한 함수들</strong></p>
+<ul>
+<li>
+<p>연산자들</p>
+<ul>
+<li><code>==, &gt; , &gt;=, &amp;, |, !</code></li>
+</ul>
+</li>
+<li>
+<p><code>유용한</code> 함수들</p>
+<ul>
+<li><p><code><a href="https://rdrr.io/r/base/NA.html">is.na( )</a></code></p></li>
+<li><p><code>between( ), near( )</code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,263,554
+Columns: 10
+$ 대상연월             &lt;dbl&gt; 202107, 202107, 202107, 202107, 202107, 202107, 2…
+$ 요일                 &lt;chr&gt; "일", "일", "일", "일", "일", "일", "일", "일", "…
+$ 도착시간             &lt;chr&gt; "09", "09", "09", "09", "09", "09", "09", "09", "…
+$ `출발 시군구 코드`   &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, 11010, …
+$ `도착 시군구 코드`   &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, 11010, …
+$ 성별                 &lt;chr&gt; "F", "F", "F", "F", "F", "F", "F", "F", "F", "F",…
+$ 나이                 &lt;chr&gt; "00", "10", "10", "10", "10", "15", "15", "15", "…
+$ 이동유형             &lt;chr&gt; "HE", "HW", "HE", "EE", "HH", "EH", "WH", "EE", "…
+$ `평균 이동 시간(분)` &lt;dbl&gt; 10, 10, 10, 20, 20, 10, 10, 10, 10, 10, 30, 60, 1…
+$ `이동인구(합)`       &lt;chr&gt; "55.41", "5.9", "41.5", "11.98", "5.93", "6.05", …</code></pre>
+</div>
+<div class="sourceCode" id="cb19" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 일요일에 운전을 한 여자</span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;">&lt;-</span> <span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;">janitor</span><span class="fu" style="color: #4758AB;">::</span><span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">yoil</span> <span class="op" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">'일'</span>,</span>
+<span>         <span class="va" style="color: #111111;">seongbyeol</span> <span class="op" style="color: #5E5E5E;">==</span> <span class="st" style="color: #20794D;">'F'</span><span class="op" style="color: #5E5E5E;">)</span> </span>
+<span></span>
+<span><span class="co" style="color: #5E5E5E;"># 출발코드가 11010 이면서 도착코드가 11010인 data</span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">chulbal_sigungu_kodeu</span> <span class="op" style="color: #5E5E5E;">==</span> <span class="fl" style="color: #AD0000;">11010</span>,</span>
+<span>         <span class="va" style="color: #111111;">dochag_sigungu_kodeu</span> <span class="op" style="color: #5E5E5E;">==</span> <span class="fl" style="color: #AD0000;">11010</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 117 × 10
+   daesang…¹ yoil  docha…² chulb…³ docha…⁴ seong…⁵ nai   idong…⁶ pyeon…⁷ idong…⁸
+       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  
+ 1    202107 일    09        11010   11010 F       00    HE           10 55.41  
+ 2    202107 일    09        11010   11010 F       10    HW           10 5.9    
+ 3    202107 일    09        11010   11010 F       10    HE           10 41.5   
+ 4    202107 일    09        11010   11010 F       10    EE           20 11.98  
+ 5    202107 일    09        11010   11010 F       10    HH           20 5.93   
+ 6    202107 일    09        11010   11010 F       15    EH           10 6.05   
+ 7    202107 일    09        11010   11010 F       15    WH           10 4.04   
+ 8    202107 일    09        11010   11010 F       15    EE           10 20.39  
+ 9    202107 일    09        11010   11010 F       15    HE           10 76.78  
+10    202107 일    09        11010   11010 F       15    HW           10 48.43  
+# … with 107 more rows, and abbreviated variable names ¹​daesang_yeon_wol,
+#   ²​dochagsigan, ³​chulbal_sigungu_kodeu, ⁴​dochag_sigungu_kodeu, ⁵​seongbyeol,
+#   ⁶​idong_yuhyeong, ⁷​pyeong_gyun_idong_sigan_bun, ⁸​idong_ingu_hab</code></pre>
+</div>
+<div class="sourceCode" id="cb21" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 나이가 20~40대인 data</span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/between.html">between</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">nai</span>, <span class="fl" style="color: #AD0000;">20</span>,<span class="fl" style="color: #AD0000;">40</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 25,761 × 10
+   daesang…¹ yoil  docha…² chulb…³ docha…⁴ seong…⁵ nai   idong…⁶ pyeon…⁷ idong…⁸
+       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  
+ 1    202107 일    09        11010   11010 F       20    WH           30 10.83  
+ 2    202107 일    09        11010   11010 F       20    EH           60 8.68   
+ 3    202107 일    09        11010   11010 F       20    EW           10 *      
+ 4    202107 일    09        11010   11010 F       20    WW           70 *      
+ 5    202107 일    09        11010   11010 F       20    WE           50 *      
+ 6    202107 일    09        11010   11010 F       20    HE           10 100.14 
+ 7    202107 일    09        11010   11010 F       20    HH           10 8.67   
+ 8    202107 일    09        11010   11010 F       20    HW           10 143.46 
+ 9    202107 일    09        11010   11010 F       20    EE           10 43.69  
+10    202107 일    09        11010   11010 F       25    HH           20 16.16  
+# … with 25,751 more rows, and abbreviated variable names ¹​daesang_yeon_wol,
+#   ²​dochagsigan, ³​chulbal_sigungu_kodeu, ⁴​dochag_sigungu_kodeu, ⁵​seongbyeol,
+#   ⁶​idong_yuhyeong, ⁷​pyeong_gyun_idong_sigan_bun, ⁸​idong_ingu_hab</code></pre>
+</div>
+</div>
+</section><section id="원하는-행들을-잘라내는-slice방법" class="level3"><h3 class="anchored" data-anchor-id="원하는-행들을-잘라내는-slice방법">원하는 행들을 잘라내는 (slice)방법</h3>
+<p>기본 함수인 <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> 의 확장버전</p>
+<ul>
+<li>
+<p>기본적으로 인덱싱을 제공</p>
+<ul>
+<li>맨 마지막 인덱스: <code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code>
+</li>
+</ul>
+</li>
+<li>
+<p>유용한 함수들</p>
+<ul>
+<li><code>slice_max( ),slice_min( ),slice_sample(),slice_head(),slice_tail()</code></li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb23" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 15~20번째 행들 추출</span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">15</span><span class="op" style="color: #5E5E5E;">:</span><span class="fl" style="color: #AD0000;">20</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  daesang_…¹ yoil  docha…² chulb…³ docha…⁴ seong…⁵ nai   idong…⁶ pyeon…⁷ idong…⁸
+       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  
+1     202107 일    09        11010   11010 F       20    WE           50 *      
+2     202107 일    09        11010   11010 F       20    HE           10 100.14 
+3     202107 일    09        11010   11010 F       20    HH           10 8.67   
+4     202107 일    09        11010   11010 F       20    HW           10 143.46 
+5     202107 일    09        11010   11010 F       20    EE           10 43.69  
+6     202107 일    09        11010   11010 F       25    HH           20 16.16  
+# … with abbreviated variable names ¹​daesang_yeon_wol, ²​dochagsigan,
+#   ³​chulbal_sigungu_kodeu, ⁴​dochag_sigungu_kodeu, ⁵​seongbyeol,
+#   ⁶​idong_yuhyeong, ⁷​pyeong_gyun_idong_sigan_bun, ⁸​idong_ingu_hab</code></pre>
+</div>
+<div class="sourceCode" id="cb25" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 마지막 6개의 행들 추출 </span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_tail</a></span><span class="op" style="color: #5E5E5E;">(</span>n <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">6</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  daesang_…¹ yoil  docha…² chulb…³ docha…⁴ seong…⁵ nai   idong…⁶ pyeon…⁷ idong…⁸
+       &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;  
+1     202107 일    09        39000   11240 F       40    EW           50 3.44   
+2     202107 일    09        39000   11240 F       40    EE           60 3.42   
+3     202107 일    09        39000   11240 F       40    EH           60 3.43   
+4     202107 일    09        39000   11240 F       45    EH           80 3.3    
+5     202107 일    09        39000   11240 F       50    EH           30 3.12   
+6     202107 일    09        39000   11240 F       55    EE           80 3.27   
+# … with abbreviated variable names ¹​daesang_yeon_wol, ²​dochagsigan,
+#   ³​chulbal_sigungu_kodeu, ⁴​dochag_sigungu_kodeu, ⁵​seongbyeol,
+#   ⁶​idong_yuhyeong, ⁷​pyeong_gyun_idong_sigan_bun, ⁸​idong_ingu_hab</code></pre>
+</div>
+<div class="sourceCode" id="cb27" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># nai 변수가 숫자형이 아닌 문자형 데이터이므로, 데이터 변환 후</span></span>
+<span><span class="co" style="color: #5E5E5E;"># nai 변수만 따로 가져와서, 나이 TOP 5 추출하기 </span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op" style="color: #5E5E5E;">(</span>nai <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">nai</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">nai</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">nai</span>, n <span class="op" style="color: #5E5E5E;">=</span> <span class="fl" style="color: #AD0000;">5</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 1
+    nai
+  &lt;dbl&gt;
+1    80
+2    75
+3    70
+4    65
+5    60</code></pre>
+</div>
+</div>
+</section><section id="내맘대로-행을-정렬arrange-하는-방법" class="level3"><h3 class="anchored" data-anchor-id="내맘대로-행을-정렬arrange-하는-방법">내맘대로 행을 정렬(arrange) 하는 방법</h3>
+<ul>
+<li><p>정렬 기준 우선 순위 순서대로 설정</p></li>
+<li><p>내림차순 : <code><a href="https://dplyr.tidyverse.org/reference/desc.html">desc()</a></code></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb29" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">dochagsigan</span>,</span>
+<span>         <span class="va" style="color: #111111;">pyeong_gyun_idong_sigan_bun</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">dochagsigan</span>, <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">pyeong_gyun_idong_sigan_bun</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 2
+   dochagsigan pyeong_gyun_idong_sigan_bun
+   &lt;chr&gt;                             &lt;dbl&gt;
+ 1 09                                  600
+ 2 09                                  580
+ 3 09                                  550
+ 4 09                                  490
+ 5 09                                  470
+ 6 09                                  470
+ 7 09                                  470
+ 8 09                                  460
+ 9 09                                  460
+10 09                                  450
+# … with 62,066 more rows</code></pre>
+</div>
+</div>
+</section><section id="원하는-열을-선택select하는-방법" class="level3"><h3 class="anchored" data-anchor-id="원하는-열을-선택select하는-방법">원하는 열을 선택(select)하는 방법</h3>
+<p><strong>사용할 수 있는 옵션들</strong></p>
+<ul>
+<li>
+<p>사용가능 연산자들</p>
+<ul>
+<li>
+<code>: , ! , &amp; , | , c( )</code> 사용</li>
+</ul>
+</li>
+<li>
+<p>편리한 함수들</p>
+<ul>
+<li><p><code>everything( ), last_col( )</code></p></li>
+<li><p><code>starts_with( ),ends_with( ),contains( )</code></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb31" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># sido 변수를 1열에 배치해주고, 나머지는 순차적으로! </span></span>
+<span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">sido</span>, <span class="fu" style="color: #4758AB;"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span>  </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 4
+    sido sigungu name     full_name          
+   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;              
+ 1 11000   11010 종로구   서울특별시 종로구  
+ 2 11000   11020 중구     서울특별시 중구    
+ 3 11000   11030 용산구   서울특별시 용산구  
+ 4 11000   11040 성동구   서울특별시 성동구  
+ 5 11000   11050 광진구   서울특별시 광진구  
+ 6 11000   11060 동대문구 서울특별시 동대문구
+ 7 11000   11070 중랑구   서울특별시 중랑구  
+ 8 11000   11080 성북구   서울특별시 성북구  
+ 9 11000   11090 강북구   서울특별시 강북구  
+10 11000   11100 도봉구   서울특별시 도봉구  
+# … with 81 more rows</code></pre>
+</div>
+<div class="sourceCode" id="cb33" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># name 변수와 last col인 full_name 변수를 가져와줘!</span></span>
+<span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">name</span>, <span class="fu" style="color: #4758AB;"><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 91 × 2
+   name     full_name          
+   &lt;chr&gt;    &lt;chr&gt;              
+ 1 종로구   서울특별시 종로구  
+ 2 중구     서울특별시 중구    
+ 3 용산구   서울특별시 용산구  
+ 4 성동구   서울특별시 성동구  
+ 5 광진구   서울특별시 광진구  
+ 6 동대문구 서울특별시 동대문구
+ 7 중랑구   서울특별시 중랑구  
+ 8 성북구   서울특별시 성북구  
+ 9 강북구   서울특별시 강북구  
+10 도봉구   서울특별시 도봉구  
+# … with 81 more rows</code></pre>
+</div>
+</div>
+</section><section id="나만의-열을-생성mutate하는-방법" class="level3"><h3 class="anchored" data-anchor-id="나만의-열을-생성mutate하는-방법">나만의 열을 생성(mutate)하는 방법</h3>
+<ul>
+<li><strong>new = old 문법</strong></li>
+</ul>
+<p><code>mutate(new = old_1 + old_2 …. + old_n)</code></p>
+<ul>
+<li>유용한 옵션</li>
+</ul>
+<p><code>.keep = c('all', 'used', 'unused', 'none' )</code></p>
+<ul>
+<li>
+<p>궁합 좋은 함수들(심화공부<code>)</code></p>
+<ul>
+<li><code>case_when() , na_if(), coalesce(), if_else()</code></li>
+</ul>
+</li>
+<li><p>년도 정도만 뺴내오기</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb35" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw" style="color: #003B4F;"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;"><a href="https://stringr.tidyverse.org">stringr</a></span><span class="op" style="color: #5E5E5E;">)</span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 62,076
+Columns: 10
+$ daesang_yeon_wol            &lt;dbl&gt; 202107, 202107, 202107, 202107, 202107, 20…
+$ yoil                        &lt;chr&gt; "일", "일", "일", "일", "일", "일", "일", …
+$ dochagsigan                 &lt;chr&gt; "09", "09", "09", "09", "09", "09", "09", …
+$ chulbal_sigungu_kodeu       &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, …
+$ dochag_sigungu_kodeu        &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, …
+$ seongbyeol                  &lt;chr&gt; "F", "F", "F", "F", "F", "F", "F", "F", "F…
+$ nai                         &lt;chr&gt; "00", "10", "10", "10", "10", "15", "15", …
+$ idong_yuhyeong              &lt;chr&gt; "HE", "HW", "HE", "EE", "HH", "EH", "WH", …
+$ pyeong_gyun_idong_sigan_bun &lt;dbl&gt; 10, 10, 10, 20, 20, 10, 10, 10, 10, 10, 30…
+$ idong_ingu_hab              &lt;chr&gt; "55.41", "5.9", "41.5", "11.98", "5.93", "…</code></pre>
+</div>
+<div class="sourceCode" id="cb37" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;">%&lt;&gt;%</span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op" style="color: #5E5E5E;">(</span>year <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://stringr.tidyverse.org/reference/str_sub.html">str_sub</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">daesang_yeon_wol</span>, <span class="fl" style="color: #AD0000;">1</span>,<span class="fl" style="color: #AD0000;">4</span><span class="op" style="color: #5E5E5E;">)</span>,</span>
+<span>         year <span class="op" style="color: #5E5E5E;">=</span> <span class="fu" style="color: #4758AB;"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">year</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">year</span>, <span class="fu" style="color: #4758AB;"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span> </span></code></pre></div>
+</div>
+<ul>
+<li>분(min)을 시간(hr)으로 변환</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb38" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 62,076
+Columns: 11
+$ year                        &lt;int&gt; 2021, 2021, 2021, 2021, 2021, 2021, 2021, …
+$ daesang_yeon_wol            &lt;dbl&gt; 202107, 202107, 202107, 202107, 202107, 20…
+$ yoil                        &lt;chr&gt; "일", "일", "일", "일", "일", "일", "일", …
+$ dochagsigan                 &lt;chr&gt; "09", "09", "09", "09", "09", "09", "09", …
+$ chulbal_sigungu_kodeu       &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, …
+$ dochag_sigungu_kodeu        &lt;dbl&gt; 11010, 11010, 11010, 11010, 11010, 11010, …
+$ seongbyeol                  &lt;chr&gt; "F", "F", "F", "F", "F", "F", "F", "F", "F…
+$ nai                         &lt;chr&gt; "00", "10", "10", "10", "10", "15", "15", …
+$ idong_yuhyeong              &lt;chr&gt; "HE", "HW", "HE", "EE", "HH", "EH", "WH", …
+$ pyeong_gyun_idong_sigan_bun &lt;dbl&gt; 10, 10, 10, 20, 20, 10, 10, 10, 10, 10, 30…
+$ idong_ingu_hab              &lt;chr&gt; "55.41", "5.9", "41.5", "11.98", "5.93", "…</code></pre>
+</div>
+<div class="sourceCode" id="cb40" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op" style="color: #5E5E5E;">(</span>idong_sigan_hr <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">pyeong_gyun_idong_sigan_bun</span> <span class="op" style="color: #5E5E5E;">/</span> <span class="fl" style="color: #AD0000;">60</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">idong_sigan_hr</span>, <span class="fu" style="color: #4758AB;"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 12
+   idong_sig…¹  year daesa…² yoil  docha…³ chulb…⁴ docha…⁵ seong…⁶ nai   idong…⁷
+         &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+ 1       0.167  2021  202107 일    09        11010   11010 F       00    HE     
+ 2       0.167  2021  202107 일    09        11010   11010 F       10    HW     
+ 3       0.167  2021  202107 일    09        11010   11010 F       10    HE     
+ 4       0.333  2021  202107 일    09        11010   11010 F       10    EE     
+ 5       0.333  2021  202107 일    09        11010   11010 F       10    HH     
+ 6       0.167  2021  202107 일    09        11010   11010 F       15    EH     
+ 7       0.167  2021  202107 일    09        11010   11010 F       15    WH     
+ 8       0.167  2021  202107 일    09        11010   11010 F       15    EE     
+ 9       0.167  2021  202107 일    09        11010   11010 F       15    HE     
+10       0.167  2021  202107 일    09        11010   11010 F       15    HW     
+# … with 62,066 more rows, 2 more variables: pyeong_gyun_idong_sigan_bun &lt;dbl&gt;,
+#   idong_ingu_hab &lt;chr&gt;, and abbreviated variable names ¹​idong_sigan_hr,
+#   ²​daesang_yeon_wol, ³​dochagsigan, ⁴​chulbal_sigungu_kodeu,
+#   ⁵​dochag_sigungu_kodeu, ⁶​seongbyeol, ⁷​idong_yuhyeong</code></pre>
+</div>
+</div>
+<ul>
+<li>시도 정보만 빼내오기(ex. 서울특별시, 부산광역시…)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb42" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu" style="color: #4758AB;"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 91
+Columns: 4
+$ sido      &lt;dbl&gt; 11000, 11000, 11000, 11000, 11000, 11000, 11000, 11000, 1100…
+$ sigungu   &lt;dbl&gt; 11010, 11020, 11030, 11040, 11050, 11060, 11070, 11080, 1109…
+$ name      &lt;chr&gt; "종로구", "중구", "용산구", "성동구", "광진구", "동대문구", …
+$ full_name &lt;chr&gt; "서울특별시 종로구", "서울특별시 중구", "서울특별시 용산구",…</code></pre>
+</div>
+<div class="sourceCode" id="cb44" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">reference_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op" style="color: #5E5E5E;">(</span>sido_name <span class="op" style="color: #5E5E5E;">=</span><span class="fu" style="color: #4758AB;"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split_fixed</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">full_name</span>,</span>
+<span>                                    pattern <span class="op" style="color: #5E5E5E;">=</span> <span class="st" style="color: #20794D;">" "</span>,<span class="fl" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">[</span>,<span class="fl" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">sido_name</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 17 × 1
+   sido_name     
+   &lt;chr&gt;         
+ 1 서울특별시    
+ 2 부산광역시    
+ 3 대구광역시    
+ 4 인천광역시    
+ 5 광주광역시    
+ 6 대전광역시    
+ 7 울산광역시    
+ 8 세종특별자치시
+ 9 경기도        
+10 강원도        
+11 충청북도      
+12 충청남도      
+13 전라북도      
+14 전라남도      
+15 경상북도      
+16 경상남도      
+17 제주특별자치도</code></pre>
+</div>
+</div>
+</section><section id="열-이름-다시-정하기rename" class="level3"><h3 class="anchored" data-anchor-id="열-이름-다시-정하기rename">열 이름 다시 정하기(rename)</h3>
+<p><code>df %&gt;% rename(new = old)</code></p>
+<p><code>df %&gt;% rename_with(function)</code></p>
+<ul>
+<li>A을 a_new로 바꾸기</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb46" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># df %&gt;% rename(a_new = A) </span></span></code></pre></div>
+</div>
+<ul>
+<li>모든 열이름 대문자로 바꾸기</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb47" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># df %&gt;% rename_with(toupper)</span></span></code></pre></div>
+</div>
+<ul>
+<li>실습하기</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb48" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op" style="color: #5E5E5E;">(</span>avg_time_min<span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">pyeong_gyun_idong_sigan_bun</span>,</span>
+<span>         ppl_sum <span class="op" style="color: #5E5E5E;">=</span> <span class="va" style="color: #111111;">idong_ingu_hab</span><span class="op" style="color: #5E5E5E;">)</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">avg_time_min</span>, <span class="va" style="color: #111111;">ppl_sum</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 2
+   avg_time_min ppl_sum
+          &lt;dbl&gt; &lt;chr&gt;  
+ 1           10 55.41  
+ 2           10 5.9    
+ 3           10 41.5   
+ 4           20 11.98  
+ 5           20 5.93   
+ 6           10 6.05   
+ 7           10 4.04   
+ 8           10 20.39  
+ 9           10 76.78  
+10           10 48.43  
+# … with 62,066 more rows</code></pre>
+</div>
+</div>
+</section><section id="열의-위치를-재배치relocate-하는-방법" class="level3"><h3 class="anchored" data-anchor-id="열의-위치를-재배치relocate-하는-방법">열의 위치를 재배치(relocate) 하는 방법</h3>
+<ul>
+<li>열의 위치를 앞으로 땅김</li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb50" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># df %&gt;% relocate(col)</span></span>
+<span><span class="co" style="color: #5E5E5E;"># df %&gt;% select(col, everything())</span></span></code></pre></div>
+</div>
+<ul>
+<li>
+<p>특정 위치로 옮길떄</p>
+<ul>
+<li><p><code>.before , .after</code> 옵션</p></li>
+<li><p><code><a href="https://tidyselect.r-lib.org/reference/everything.html">last_col()</a></code>함수</p></li>
+</ul>
+</li>
+<li>
+<p>변수 타입으로 정렬가능</p>
+<ul>
+<li>
+<code>where(is.character)</code> 사용</li>
+</ul>
+</li>
+<li><p>실습하기</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb51" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 이동 인구 합 앞으로</span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">idong_ingu_hab</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 11
+   idong_ing…¹  year daesa…² yoil  docha…³ chulb…⁴ docha…⁵ seong…⁶ nai   idong…⁷
+   &lt;chr&gt;       &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
+ 1 55.41        2021  202107 일    09        11010   11010 F       00    HE     
+ 2 5.9          2021  202107 일    09        11010   11010 F       10    HW     
+ 3 41.5         2021  202107 일    09        11010   11010 F       10    HE     
+ 4 11.98        2021  202107 일    09        11010   11010 F       10    EE     
+ 5 5.93         2021  202107 일    09        11010   11010 F       10    HH     
+ 6 6.05         2021  202107 일    09        11010   11010 F       15    EH     
+ 7 4.04         2021  202107 일    09        11010   11010 F       15    WH     
+ 8 20.39        2021  202107 일    09        11010   11010 F       15    EE     
+ 9 76.78        2021  202107 일    09        11010   11010 F       15    HE     
+10 48.43        2021  202107 일    09        11010   11010 F       15    HW     
+# … with 62,066 more rows, 1 more variable: pyeong_gyun_idong_sigan_bun &lt;dbl&gt;,
+#   and abbreviated variable names ¹​idong_ingu_hab, ²​daesang_yeon_wol,
+#   ³​dochagsigan, ⁴​chulbal_sigungu_kodeu, ⁵​dochag_sigungu_kodeu, ⁶​seongbyeol,
+#   ⁷​idong_yuhyeong</code></pre>
+</div>
+<div class="sourceCode" id="cb53" style="background: #f1f3f5;"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co" style="color: #5E5E5E;"># 문자열 타입 앞으로</span></span>
+<span><span class="va" style="color: #111111;">moving_data</span> <span class="op" style="color: #5E5E5E;"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu" style="color: #4758AB;"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op" style="color: #5E5E5E;">(</span><span class="fu" style="color: #4758AB;">where</span><span class="op" style="color: #5E5E5E;">(</span><span class="va" style="color: #111111;">is.character</span><span class="op" style="color: #5E5E5E;">)</span><span class="op" style="color: #5E5E5E;">)</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62,076 × 11
+   yoil  dochagsigan seong…¹ nai   idong…² idong…³  year daesa…⁴ chulb…⁵ docha…⁶
+   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 일    09          F       00    HE      55.41    2021  202107   11010   11010
+ 2 일    09          F       10    HW      5.9      2021  202107   11010   11010
+ 3 일    09          F       10    HE      41.5     2021  202107   11010   11010
+ 4 일    09          F       10    EE      11.98    2021  202107   11010   11010
+ 5 일    09          F       10    HH      5.93     2021  202107   11010   11010
+ 6 일    09          F       15    EH      6.05     2021  202107   11010   11010
+ 7 일    09          F       15    WH      4.04     2021  202107   11010   11010
+ 8 일    09          F       15    EE      20.39    2021  202107   11010   11010
+ 9 일    09          F       15    HE      76.78    2021  202107   11010   11010
+10 일    09          F       15    HW      48.43    2021  202107   11010   11010
+# … with 62,066 more rows, 1 more variable: pyeong_gyun_idong_sigan_bun &lt;dbl&gt;,
+#   and abbreviated variable names ¹​seongbyeol, ²​idong_yuhyeong,
+#   ³​idong_ingu_hab, ⁴​daesang_yeon_wol, ⁵​chulbal_sigungu_kodeu,
+#   ⁶​dochag_sigungu_kodeu</code></pre>
+</div>
+</div>
+
+
+</section> ]]></description>
+  <guid>https://rmathematics-qmd.netlify.app/R tidyverse/tidyverse lec1/lec1.html</guid>
+  <pubDate>Thu, 19 Jan 2023 15:00:00 GMT</pubDate>
+  <media:content url="https://rmathematics-qmd.netlify.app/R tidyverse/tidyverse lec1/images/paste-9FE3AD1F.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
+</channel>
+</rss>

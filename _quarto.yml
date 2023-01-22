@@ -12,6 +12,8 @@ website:
     right:
       - text: 'R study'
         file: Rstudy.qmd
+      - text: 'R tidyverse'
+        file: Rtidyverse.qmd
       - text: 'About'
         file: about.qmd
       - text: "Blog"

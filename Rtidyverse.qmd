@@ -1,0 +1,17 @@
+---
+title: R tidyverse 
+listing:
+  contents: R tidyverse/**/*.qmd
+  sort: "date desc"
+  type: table
+  categories: true
+  sort-ui: true
+  filter-ui: false
+  fields: [date, title, description, categories]
+  date-format: "YYYY/MM/DD"
+  feed: true
+page-layout: full
+title-block-banner: false
+---
+
+R tidyverse는 tidyverse 라는 패키지를 활용하여 데이터 전처리 or 데이터 시각화를 해보는 공부시간입니다.
